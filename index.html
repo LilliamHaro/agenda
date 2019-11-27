@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/main.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section style="display: none" class="init">
+
+    <!-- registro -->
+    <form id="reg_form">
+      <input id="reg_name" name="reg_name" type="text" placeholder="Name">
+      <input id="reg_email" name="reg_email" type="email" placeholder="Email">
+      <input id="reg_password" name="reg_password" type="password" placeholder="password">
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Login -->
+    <form id="log_form">
+      <input id="log_email" name="log_email" type="email" placeholder="Email">
+      <input id="log_password" name="log_password" type="password" placeholder="password">
+      <button type="submit">Entrar</button>
+    </form>
+
+
+
+  </section>
+
+
+  <section style="display: none" class="dashboard">
+
+
+    <div class="menu_dashboard">
+      <h1>Dashboard</h1>
+      <h3 id="user_name"></h3>
+
+      <button type="button" id="logout">Salir</button>
+
+    </div>
+
+
+    <section class="month_list">
+
+
+      <h3>Mes actual</h3>
+
+
+      <div class="month_item">
+        <ul class="month_item_head">
+          <li>DO</li>
+          <li>LU</li>
+          <li>MA</li>
+          <li>MI</li>
+          <li>JU</li>
+          <li>VI</li>
+          <li>SA</li>
+        </ul>
+
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+        <ul>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+          <li>00</li>
+        </ul>
+
+      </div>
+    </section>
+
+
+
+    <section class="week_list">
+
+      <h3>Semana actual</h3>
+
+      <div class="week_item">
+
+        <div class="day monday">
+          <div class="day_head">
+            Lunes
+          </div>
+          <div class="day_body">
+
+          </div>
+        </div>
+
+        <div class="day tuesday">
+          <div class="day_head">
+            Martes
+          </div>
+          <div class="day_body">
+
+          </div>
+
+        </div>
+
+        <div class="day wednesday">
+          <div class="day_head">
+            Miercoles
+          </div>
+          <div class="day_body">
+
+          </div>
+
+        </div>
+        <div class="day thursday">
+          <div class="day_head">
+            Jueves
+          </div>
+          <div class="day_body">
+
+          </div>
+
+        </div>
+
+        <div class="day friday">
+          <div class="day_head">
+            Viernes
+          </div>
+          <div class="day_body">
+
+          </div>
+
+        </div>
+        <div class="day saturday">
+          <div class="day_head">
+            Sabado
+          </div>
+          <div class="day_body">
+
+          </div>
+
+        </div>
+        <div class="day sunday">
+          <div class="day_head">
+            Domingo
+          </div>
+          <div class="day_body">
+
+          </div>
+        </div>
+    </section>
+
+
+
+  </section>
+
+
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBKQlMFetas7TXmhIEfYWF1Qdupj8Bo3Wo",
+      authDomain: "agenda-42c7b.firebaseapp.com",
+      databaseURL: "https://agenda-42c7b.firebaseio.com",
+      projectId: "agenda-42c7b",
+      storageBucket: "agenda-42c7b.appspot.com",
+      messagingSenderId: "707286189938",
+      appId: "1:707286189938:web:7ae5caec3fa6e0dfd9bfeb"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/main.js"></script>
+
+</body>
+
+</html>
