@@ -11,7 +11,9 @@ $(document).ready(function () {
 
       database.ref('users/').child(userId).on('value', function (datasnapshot) {
         let user_name = datasnapshot.child('username').val()
+        let user_email = datasnapshot.child('email').val()
         $('#user_name').text(user_name)
+        $('#user_email').text(user_email)
 
       })
 
@@ -36,6 +38,11 @@ $(document).ready(function () {
       email: email,
       password: password
     })
+
+    // let firstWeek =
+
+
+
   }
 
   // REGISTRO
@@ -129,6 +136,49 @@ $(document).ready(function () {
       console.log('saliste');
     });
   })
+
+  function registerFirstWeek() {
+    var f = new Date();
+    // que mes es 
+    var month = f.getMonth();
+    console.log('mes', month)
+    // cuantos dias tienen el mes actual
+    let numDaysMonth = monthDays[month].num
+    console.log('numDayMonth', numDaysMonth)
+    // que dia es hoy 
+    var dia = f.getDate();
+    console.log('dia', dia)
+    // limitar el inicio y fin de cada semana
+    // dia que inicio el mes 
+    let firstNumDay = monthDays[month].firstNameDay
+    console.log('first num day', firstNumDay)
+
+    let resto = 7 - firstNumDay
+    let numWeeksActualMonth = parseInt((numDaysMonth - resto) / 7) + 1
+    console.log('num weeks ', numWeeksActualMonth)
+
+    // ubicar el dia en el numero de semana  
+
+    for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
+      if (((7 * i) + resto) > dia) {
+        console.log(i + 1)
+
+        // agregar el codifo de la semana a firebase 
+        // num week_month_year
+        let weekCode = (i + 1) + '_' + (month + 1) + '_' + 19
+
+        database.ref('users/' + id + '/weeks/' + weekCode).set({
+          username: name,
+          email: email,
+          password: password
+        })
+
+        return false;
+      }
+    }
+  }
+
+
 
 
 
