@@ -1,5 +1,35 @@
 $(document).ready(function () {
 
+
+
+  // WEEK CODE 
+  function registerFirstWeek(id) {
+
+    // firbase database reference 
+    var database = firebase.database();
+    var f = new Date();
+    // mes actual ([])
+    var month = f.getMonth();
+    // dias del mes actual
+    let numDaysMonth = monthDays[month].num
+    // dia actual
+    var dia = f.getDate();
+    // nombre del primer dia del mes 
+    let firstNumDay = monthDays[month].firstNameDay
+    // numero de semanas del mes actual
+    let resto = 7 - firstNumDay
+    let numWeeksActualMonth = parseInt((numDaysMonth - resto) / 7) + 1
+
+    //semana al que pertenece el dia actual 
+    for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
+      if (((7 * i) + resto) > dia) {
+        // agregar el codifo de la semana a firebase 
+        let weekCode = (i + 1) + '_' + (month + 1) + '_' + 19
+        return weekCode;
+      }
+    }
+  }
+
   // OBSERVADOR
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -8,14 +38,51 @@ $(document).ready(function () {
 
       let userId = user.uid
       var database = firebase.database();
+      let actualWeekCode = registerFirstWeek(userId)
 
-      database.ref('users/').child(userId).on('value', function (datasnapshot) {
+
+      // mostrar datos 
+      database.ref('users/' + userId).on('value', function (datasnapshot) {
         let user_name = datasnapshot.child('username').val()
         let user_email = datasnapshot.child('email').val()
         $('#user_name').text(user_name)
         $('#user_email').text(user_email)
 
       })
+
+      // mostrar tareas
+
+      database.ref('users/' + userId + '/_tasks').on("child_added", function (datasnapshot) {
+        var taskList = datasnapshot.val()
+        console.log('tasks', taskList)
+      });
+
+
+      // agregar tareas
+
+      let userId_created_moment = userId + '_' +
+
+        function addTask(userId) {
+          database.ref('users/' + userId + '/_tasks').push().set({
+            codeWeek: actualWeekCode,
+            month: "",
+            year: "",
+            day: "",
+            time: "",
+            content: "jjjjjjjaaaaaaaaaa",
+            status: "1",
+            dia: "",
+            id: userId_created_moment
+          })
+        }
+
+      addTask(userId)
+
+      // modificar tareas
+
+
+
+      // borrar tareas 
 
     } else {
       $('.init').show()
@@ -39,7 +106,6 @@ $(document).ready(function () {
       password: password
     })
 
-    // let firstWeek =
 
 
 
@@ -137,46 +203,8 @@ $(document).ready(function () {
     });
   })
 
-  function registerFirstWeek() {
-    var f = new Date();
-    // que mes es 
-    var month = f.getMonth();
-    console.log('mes', month)
-    // cuantos dias tienen el mes actual
-    let numDaysMonth = monthDays[month].num
-    console.log('numDayMonth', numDaysMonth)
-    // que dia es hoy 
-    var dia = f.getDate();
-    console.log('dia', dia)
-    // limitar el inicio y fin de cada semana
-    // dia que inicio el mes 
-    let firstNumDay = monthDays[month].firstNameDay
-    console.log('first num day', firstNumDay)
 
-    let resto = 7 - firstNumDay
-    let numWeeksActualMonth = parseInt((numDaysMonth - resto) / 7) + 1
-    console.log('num weeks ', numWeeksActualMonth)
 
-    // ubicar el dia en el numero de semana  
-
-    for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
-      if (((7 * i) + resto) > dia) {
-        console.log(i + 1)
-
-        // agregar el codifo de la semana a firebase 
-        // num week_month_year
-        let weekCode = (i + 1) + '_' + (month + 1) + '_' + 19
-
-        database.ref('users/' + id + '/weeks/' + weekCode).set({
-          username: name,
-          email: email,
-          password: password
-        })
-
-        return false;
-      }
-    }
-  }
 
 
 
