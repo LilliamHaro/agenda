@@ -8,6 +8,8 @@ $(document).ready(function () {
     // firbase database reference 
     var database = firebase.database();
     var f = new Date();
+    // año actual 
+    var year = f.getFullYear();
     // mes actual ([])
     var month = f.getMonth();
     // dias del mes actual
@@ -24,7 +26,7 @@ $(document).ready(function () {
     for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
       if (((7 * i) + resto) > dia) {
         // agregar el codifo de la semana a firebase 
-        let weekCode = (i + 1) + '_' + (month + 1) + '_' + 19
+        let weekCode = (i + 1) + '_' + (month + 1) + '_' + year
         return weekCode;
       }
     }
@@ -55,28 +57,48 @@ $(document).ready(function () {
       database.ref('users/' + userId + '/_tasks').on("child_added", function (datasnapshot) {
         var taskList = datasnapshot.val()
         console.log('tasks', taskList)
+        let task_plantilla = '<li>' + taskList.content + '</li>'
+        console.log('plantilaaa', task_plantilla)
+
       });
 
 
       // agregar tareas
 
-      let userId_created_moment = userId + '_' +
+      var f = new Date();
+      let month = f.getMonth() + 1;
+      let year = f.getFullYear();;
+      let day = f.getDate();;
+      let time = f.getHours() + '-' + f.getMinutes() + '-' + f.getSeconds();
+      let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+      let date = new Date(year + '-' + month + '-' + day).getDay();
+      let dayName = dias[date];
+      let userId_created_moment = userId + "_" + day + "_" + month + "_" + year + "_" + time
 
-        function addTask(userId) {
-          database.ref('users/' + userId + '/_tasks').push().set({
-            codeWeek: actualWeekCode,
-            month: "",
-            year: "",
-            day: "",
-            time: "",
-            content: "jjjjjjjaaaaaaaaaa",
-            status: "1",
-            dia: "",
-            id: userId_created_moment
-          })
-        }
 
-      addTask(userId)
+
+      function addTask(userId, task_content) {
+        database.ref('users/' + userId + '/_tasks').push().set({
+          codeWeek: actualWeekCode,
+          month: month,
+          year: year,
+          day: day,
+          time: time,
+          dayName: dayName,
+          content: task_content,
+          status: "1",
+          id: userId_created_moment
+        })
+      }
+
+
+      $('.addTaskBlock  input').on('focusout', function () {
+        // console.log('user id ddd', userId, 'dd', user.uid)
+        let task_content = $(this).val()
+        addTask(user.uid, task_content)
+
+      })
+
 
       // modificar tareas
 
@@ -205,6 +227,12 @@ $(document).ready(function () {
 
 
 
+
+  // open add task block 
+
+  $('.open_addTaskBlock').on('click', function () {
+    $(this).next().show()
+  })
 
 
 
