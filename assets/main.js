@@ -88,6 +88,8 @@ $(document).ready(function () {
           content: task_content,
           status: "1",
           id: userId_created_moment
+
+          // aumentar fecha en la cual sera asignada 
         })
       }
 
