@@ -250,7 +250,11 @@ $(document).ready(function () {
   //   $(this).next().show()
   // })
 
-
+  // año actual 
+  var f = new Date();
+  var actualYear = f.getFullYear();
+  var month = f.getMonth();
+  var actualDay = f.getDate();
 
   // generar calendario
   for (var i = 0; i < year_2019.length; i++) {
@@ -259,7 +263,6 @@ $(document).ready(function () {
     <div id="month_`+ year_2019[i].name + `" class="month_item"> 
     <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
     <ul class="month_item_head">
-        
           <li>LU</li>
           <li>MA</li>
           <li>MI</li>
@@ -283,18 +286,71 @@ $(document).ready(function () {
     // num days 
     for (var j = 0; j < year_2019[i].numDays; j++) {
       let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
-      let data_day = $('<li data-weekNum=' + codeWeek + ' >' + (j + 1) + '</li>')
+      let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
       container_days.append(data_day)
     }
 
+    let week_item = $(`<div class="week_item">
+      <ul class="week_item_header">
+        <li>LU</li>
+        <li>MA</li>
+        <li>MI</li>
+        <li>JU</li>
+        <li>VI</li>
+        <li>SA</li>
+        <li>DO</li>
+      </ul>
+      <ul class="week_item_body">
+        <div class="week">
+        </div>
+        <div class="week">
+        </div>
+        <div class="week">
+        </div>
+        <div class="week">
+        </div>
+        <div class="week">
+        </div>
+        <div class="week">
+        </div>
+      </ul>
+    </div>`)
 
-    // click day  
-    // take week code 
-    // take month
-    // tale year 
+    if (codeWeek === 1) {
 
+    } else if (codeWeek === 2) {
+
+    } else if (codeWeek === 3) {
+
+    } else if (codeWeek === 4) {
+
+    } else if (codeWeek === 5) {
+
+    } else if (codeWeek === 6) {
+
+    }
 
   }
+
+  // show day detail 
+
+  // $('.month_item_body li').on('click', function () {
+  //   let dayCode = $(this).attr('data-codedmy')
+
+
+  // })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
