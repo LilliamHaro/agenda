@@ -17,12 +17,20 @@
   bottom: 0;
   right: 0;
   width: 350px;
-  background: rgba(0, 0, 0, 0.2);
+}
+
+.month_item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: red;
 }
 
 .month_item ul {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   list-style: none;
