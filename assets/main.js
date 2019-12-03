@@ -28,7 +28,7 @@ $(document).ready(function () {
     for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
       if (((7 * i) + resto) > dia) {
         // agregar el codifo de la semana a firebase 
-        let weekCode = (i)
+        let weekCode = (i + 1)
 
         console.log('actual week code', weekCode)
         return weekCode;
