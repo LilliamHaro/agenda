@@ -17,6 +17,7 @@
   bottom: 0;
   right: 0;
   width: 350px;
+  height: 322px;
 }
 
 .month_item {
@@ -58,14 +59,39 @@
   align-items: center;
   width: 90%;
   background: rgba(0, 0, 0, 0.2);
+  flex-direction: column;
 }
 
-.week_item .day {
+.week_item_header,
+.week_item_body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.week_item_body .week {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+}
+.week_item_body .week li {
   width: 14.28%;
   height: 65vh;
   min-height: 385px;
 }
 
+.week_item_header li {
+  width: 14.28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
 .day_head {
   display: flex;
   justify-content: center;

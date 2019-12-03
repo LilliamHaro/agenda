@@ -259,6 +259,7 @@ $(document).ready(function () {
   // generar calendario
   for (var i = 0; i < year_2019.length; i++) {
     let container = $('.month_list')
+
     let month = $(`
     <div id="month_`+ year_2019[i].name + `" class="month_item"> 
     <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
@@ -277,20 +278,9 @@ $(document).ready(function () {
 
     container.append(month)
 
-    let container_days = $('#month_' + year_2019[i].name).find('.month_item_body')
-    // void days 
-    for (var k = 1; k < year_2019[i].firstNameDay; k++) {
-      let void_day = $('<li> </li>')
-      container_days.append(void_day)
-    }
-    // num days 
-    for (var j = 0; j < year_2019[i].numDays; j++) {
-      let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
-      let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
-      container_days.append(data_day)
-    }
-
-    let week_item = $(`<div class="week_item">
+    let containerWeek = $('.week_list')
+    let weekGroup = $(`<div id="week_` + year_2019[i].name + `" class="week_item">
+      <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
       <ul class="week_item_header">
         <li>LU</li>
         <li>MA</li>
@@ -301,34 +291,69 @@ $(document).ready(function () {
         <li>DO</li>
       </ul>
       <ul class="week_item_body">
-        <div class="week">
-        </div>
-        <div class="week">
-        </div>
-        <div class="week">
-        </div>
-        <div class="week">
-        </div>
-        <div class="week">
-        </div>
-        <div class="week">
-        </div>
+        <ul class="week">
+        </ul>
+        <ul class="week">
+        </ul>
+        <ul class="week">
+        </ul>
+        <ul class="week">
+        </ul>
+        <ul class="week">
+        </ul>
+        <ul class="week">
+        </ul>
       </ul>
     </div>`)
 
-    if (codeWeek === 1) {
+    containerWeek.append(weekGroup)
 
-    } else if (codeWeek === 2) {
 
-    } else if (codeWeek === 3) {
 
-    } else if (codeWeek === 4) {
+    let container_days = $('#month_' + year_2019[i].name).find('.month_item_body')
 
-    } else if (codeWeek === 5) {
+    let containerweek_days = $('#week_' + year_2019[i].name).find('.week_item_body')
+    // void days 
+    for (var k = 1; k < year_2019[i].firstNameDay; k++) {
+      let void_day = $('<li> </li>')
+      container_days.append(void_day)
+      containerweek_days.find('.week:nth-child(1)').append(void_day)
+    }
+    // num days 
+    for (var j = 0; j < year_2019[i].numDays; j++) {
+      let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
+      let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
+      let data_day_for_week = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
 
-    } else if (codeWeek === 6) {
+
+      if (codeWeek === 1) {
+        containerweek_days.find('.week:nth-child(1)').append(data_day_for_week)
+
+      } else if (codeWeek === 2) {
+        containerweek_days.find('.week:nth-child(2)').append(data_day_for_week)
+
+      } else if (codeWeek === 3) {
+        containerweek_days.find('.week:nth-child(3)').append(data_day_for_week)
+
+      } else if (codeWeek === 4) {
+        containerweek_days.find('.week:nth-child(4)').append(data_day_for_week)
+
+      } else if (codeWeek === 5) {
+        containerweek_days.find('.week:nth-child(5)').append(data_day_for_week)
+
+      } else if (codeWeek === 6) {
+        containerweek_days.find('.week:nth-child(6)').append(data_day_for_week)
+
+      }
+
+      container_days.append(data_day)
+
 
     }
+
+
+
+
 
   }
 
