@@ -2,35 +2,41 @@ $(document).ready(function () {
 
 
 
-  // // WEEK CODE 
-  // function registerFirstWeek(id) {
+  // WEEK CODE 
+  function registerFirstWeek(id) {
 
-  //   // firbase database reference 
-  //   var database = firebase.database();
-  //   var f = new Date();
-  //   // año actual 
-  //   var year = f.getFullYear();
-  //   // mes actual ([])
-  //   var month = f.getMonth();
-  //   // dias del mes actual
-  //   // let numDaysMonth = monthDays[month].num
-  //   // dia actual
-  //   var dia = f.getDate();
-  //   // nombre del primer dia del mes 
-  //   let firstNumDay = monthDays[month].firstNameDay
-  //   // numero de semanas del mes actual
-  //   let resto = 7 - firstNumDay
-  //   let numWeeksActualMonth = parseInt((numDaysMonth - resto) / 7) + 1
+    // firbase database reference 
+    var database = firebase.database();
+    var f = new Date();
+    // año actual 
+    var year = f.getFullYear();
+    // mes actual ([])
+    var month = f.getMonth();
+    // dias del mes actual
+    // let numDaysMonth = monthDays[month].num
+    // dia actual
+    var dia = f.getDate();
+    // nombre del primer dia del mes 
+    let firstNumDay = year_2019[month].firstNameDay
+    // numero de semanas del mes actual
+    let resto = 7 - firstNumDay
 
-  //   //semana al que pertenece el dia actual 
-  //   for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
-  //     if (((7 * i) + resto) > dia) {
-  //       // agregar el codifo de la semana a firebase 
-  //       let weekCode = (i + 1) + '_' + (month + 1) + '_' + year
-  //       return weekCode;
-  //     }
-  //   }
-  // }
+    let numDaysMonth = year_2019[month].numDays
+    // let numWeeksActualMonth = parseInt((numDaysMonth - resto) / 7) + 1
+
+    //semana al que pertenece el dia actual 
+    for (var i = 1; i <= parseInt((numDaysMonth - resto) / 7); i++) {
+      if (((7 * i) + resto) > dia) {
+        // agregar el codifo de la semana a firebase 
+        let weekCode = (i)
+
+        console.log('actual week code', weekCode)
+        return weekCode;
+      }
+    }
+  }
+
+
 
   // // OBSERVADOR
   // firebase.auth().onAuthStateChanged(function (user) {
@@ -261,8 +267,10 @@ $(document).ready(function () {
   for (var i = 0; i < year_2019.length; i++) {
     let container = $('.month_list')
 
+    let NumWeekPerMonth = Math.ceil((((year_2019[i].firstNameDay) - 1) + year_2019[i].numDays) / 7)
+
     let month = $(`
-    <div id="month_`+ year_2019[i].name + `" data-order="` + (i + 1) + `" class="month_item"> 
+    <div id="month_`+ year_2019[i].name + `" data-numWeeksPerMonth = ` + NumWeekPerMonth + ` data-order="` + (i + 1) + `" class="month_item"> 
     <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
     <ul class="month_item_head">
           <li>LU</li>
@@ -280,7 +288,7 @@ $(document).ready(function () {
     container.append(month)
 
     let containerWeek = $('.week_list')
-    let weekGroup = $(`<div id="week_` + year_2019[i].name + `" class="week_item">
+    let weekGroup = $(`<div id="week_` + year_2019[i].name + `"  data-numWeeksPerMonth = ` + NumWeekPerMonth + ` class="week_item">
       <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
       <ul class="week_item_header">
         <li>LU</li>
@@ -310,7 +318,6 @@ $(document).ready(function () {
     containerWeek.append(weekGroup)
 
 
-
     let container_days = $('#month_' + year_2019[i].name).find('.month_item_body')
 
     let containerweek_days = $('#week_' + year_2019[i].name).find('.week_item_body')
@@ -324,6 +331,7 @@ $(document).ready(function () {
     // num days 
     for (var j = 0; j < year_2019[i].numDays; j++) {
       let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
+
       let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
       let data_day_for_week = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
       //  filling month days 
@@ -358,21 +366,7 @@ $(document).ready(function () {
 
 
 
-  $('.month_list #plus').on('click', function () {
-    console.log('plusss month')
-  })
 
-  $('.month_list #minus').on('click', function () {
-    console.log('plusss month')
-  })
-
-  $('.week_list #plus').on('click', function () {
-    console.log('plusss week')
-  })
-
-  $('.week_list #minus').on('click', function () {
-    console.log('plusss week')
-  })
 
 
 
@@ -387,12 +381,47 @@ $(document).ready(function () {
   for (var i = 1; i <= 12; i++) {
     if (i < actualMonth) {
       $('.month_item:nth-child(' + i + ')').addClass('before')
+
+      $('.week_item:nth-child(' + i + ') ').addClass('before')
+      $('.week_item:nth-child(' + i + ') .week_item_body .week').addClass('before')
+
     } else if (i > actualMonth) {
       $('.month_item:nth-child(' + i + ')').addClass('after')
+
+      $('.week_item:nth-child(' + i + ') ').addClass('after')
+      $('.week_item:nth-child(' + i + ') .week_item_body .week').addClass('after')
     }
     else if (i == actualMonth) {
+
+      let code_actual_week = registerFirstWeek('id')
+
+
       $('.month_item:nth-child(' + i + ')').addClass('actual')
+      $('.week_item:nth-child(' + i + ') ').addClass('actual')
+
+      // numero de semana del mes 
+      let numsOfWeeks = parseInt($('.week_item:nth-child(' + i + ')').attr('data-numweekspermonth'))
+
+      for (var j = 1; j <= numsOfWeeks; j++) {
+        if (j < code_actual_week) {
+          $('.week_item:nth-child(' + i + ')').find('.week_item_body .week:nth-child(' + j + ')').addClass('before')
+
+        } else if (j > code_actual_week) {
+          $('.week_item:nth-child(' + i + ')').find('.week_item_body .week:nth-child(' + j + ')').addClass('after')
+
+
+        } else if (j == code_actual_week) {
+          $('.week_item:nth-child(' + i + ')').find('.week_item_body .week:nth-child(' + j + ')').addClass('actual')
+
+        }
+
+
+      }
+
+
     }
+
+
   }
 
 
