@@ -250,18 +250,19 @@ $(document).ready(function () {
   //   $(this).next().show()
   // })
 
+
+
   // año actual 
   var f = new Date();
   var actualYear = f.getFullYear();
-  var month = f.getMonth();
-  var actualDay = f.getDate();
+
 
   // generar calendario
   for (var i = 0; i < year_2019.length; i++) {
     let container = $('.month_list')
 
     let month = $(`
-    <div id="month_`+ year_2019[i].name + `" class="month_item"> 
+    <div id="month_`+ year_2019[i].name + `" data-order="` + (i + 1) + `" class="month_item"> 
     <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
     <ul class="month_item_head">
           <li>LU</li>
@@ -316,16 +317,19 @@ $(document).ready(function () {
     // void days 
     for (var k = 1; k < year_2019[i].firstNameDay; k++) {
       let void_day = $('<li> </li>')
+      let void_day_for_week = $('<li> </li>')
       container_days.append(void_day)
-      containerweek_days.find('.week:nth-child(1)').append(void_day)
+      containerweek_days.find('.week:nth-child(1)').append(void_day_for_week)
     }
     // num days 
     for (var j = 0; j < year_2019[i].numDays; j++) {
       let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
       let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
       let data_day_for_week = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
+      //  filling month days 
+      container_days.append(data_day)
 
-
+      // filling week days 
       if (codeWeek === 1) {
         containerweek_days.find('.week:nth-child(1)').append(data_day_for_week)
 
@@ -346,49 +350,95 @@ $(document).ready(function () {
 
       }
 
-      container_days.append(data_day)
-
 
     }
 
-
-
-
-
   }
 
-  // show day detail 
-
-  // $('.month_item_body li').on('click', function () {
-  //   let dayCode = $(this).attr('data-codedmy')
-
-
-  // })
 
 
 
+  $('.month_list #plus').on('click', function () {
+    console.log('plusss month')
+  })
 
+  $('.month_list #minus').on('click', function () {
+    console.log('plusss month')
+  })
 
+  $('.week_list #plus').on('click', function () {
+    console.log('plusss week')
+  })
 
-
-
-
-
-
-
-
+  $('.week_list #minus').on('click', function () {
+    console.log('plusss week')
+  })
 
 
 
 
+  // ocultar los meses pasados y futuros
+
+  var actualMonth = f.getMonth() + 1;
+  var actualDay = f.getDate();
+
+  console.log(actualMonth)
+
+  for (var i = 1; i <= 12; i++) {
+    if (i < actualMonth) {
+      $('.month_item:nth-child(' + i + ')').addClass('before')
+    } else if (i > actualMonth) {
+      $('.month_item:nth-child(' + i + ')').addClass('after')
+    }
+    else if (i == actualMonth) {
+      $('.month_item:nth-child(' + i + ')').addClass('actual')
+    }
+  }
 
 
+  // prev month button 
+
+  $('#minus').on('click', function () {
+
+    let num_order = parseInt($('.month_item.actual').attr('data-order'))
+    let prev_num_order = num_order - 1 < 1 ? 12 : num_order - 1
+
+    if (prev_num_order === 12) {
+      $('.month_item').removeClass('after actual')
+      $('.month_item').addClass('before')
+      $('.month_item:last-child').addClass('actual')
+      $('.month_item:last-child').removeClass('before')
+    } else {
+      $('.month_item:nth-child(' + num_order + ')').removeClass('actual')
+      $('.month_item:nth-child(' + num_order + ')').addClass('after')
+      $('.month_item:nth-child(' + prev_num_order + ')').removeClass('before')
+      $('.month_item:nth-child(' + prev_num_order + ')').removeClass('after')
+      $('.month_item:nth-child(' + prev_num_order + ')').addClass('actual')
+    }
+
+  })
 
 
+  // next month button 
+  $('#plus').on('click', function () {
 
+    let num_order = parseInt($('.month_item.actual').attr('data-order'))
+    let next_num_order = num_order + 1 > 12 ? 1 : num_order + 1
+    console.log('next', num_order, next_num_order)
 
+    if (next_num_order === 1) {
+      $('.month_item').removeClass('before actual')
+      $('.month_item').addClass('after')
+      $('.month_item:first-child').addClass('actual')
+      $('.month_item:first-child').removeClass('after')
+    } else {
+      $('.month_item:nth-child(' + num_order + ')').removeClass('actual')
+      $('.month_item:nth-child(' + num_order + ')').addClass('before')
+      $('.month_item:nth-child(' + next_num_order + ')').removeClass('after')
+      $('.month_item:nth-child(' + next_num_order + ')').removeClass('before')
+      $('.month_item:nth-child(' + next_num_order + ')').addClass('actual')
 
-
-
+    }
+  })
 
 })

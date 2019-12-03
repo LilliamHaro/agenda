@@ -17,7 +17,8 @@
   bottom: 0;
   right: 0;
   width: 350px;
-  height: 322px;
+  height: 372px;
+  overflow: hidden;
 }
 
 .month_item {
@@ -27,6 +28,7 @@
   width: 100%;
   height: auto;
   background: red;
+  transition: all 0.5s;
 }
 
 .month_item ul {
@@ -58,8 +60,11 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  background: rgba(0, 0, 0, 0.2);
+  background: plum;
   flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .week_item_header,
@@ -70,6 +75,12 @@
   list-style: none;
   width: 100%;
   flex-wrap: wrap;
+  position: relative;
+}
+
+.week_item_body {
+  height: 65vh;
+  min-height: 385px;
 }
 
 .week_item_body .week {
@@ -78,6 +89,10 @@
   align-items: center;
   width: 100%;
   list-style: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: powderblue;
 }
 .week_item_body .week li {
   width: 14.28%;
@@ -101,4 +116,28 @@
 
 .addTaskBlock {
   display: none;
+}
+#plus {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+  width: 100px;
+  height: 100px;
+}
+#minus {
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  z-index: 999999;
+  width: 100px;
+  height: 100px;
+}
+
+.before {
+  transform: translateX(-100%);
+}
+
+.after {
+  transform: translateX(100%);
 }
