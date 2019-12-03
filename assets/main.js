@@ -300,17 +300,17 @@ $(document).ready(function () {
         <li>DO</li>
       </ul>
       <ul class="week_item_body">
-        <ul class="week">
+        <ul data-order="1" class="week">
         </ul>
-        <ul class="week">
+        <ul data-order="2" class="week">
         </ul>
-        <ul class="week">
+        <ul data-order="3" class="week">
         </ul>
-        <ul class="week">
+        <ul data-order="4" class="week">
         </ul>
-        <ul class="week">
+        <ul data-order="5" class="week">
         </ul>
-        <ul class="week">
+        <ul  data-order="6" class="week">
         </ul>
       </ul>
     </div>`)
@@ -469,5 +469,33 @@ $(document).ready(function () {
 
     }
   })
+
+
+
+  // next week 
+  $('#plus_week').on('click', function () {
+
+
+    let num_order = parseInt($('.week.actual').attr('data-order'))
+
+    // buscar el limite de semana activas del mes actual 
+    let limit_weeks_month = 6
+    let next_num_order = num_order + 1 > 12 ? 1 : num_order + 1
+    console.log('nextxt week ', num_order)
+
+  })
+
+
+  // prev week 
+  $('#minus_week').on('click', function () {
+
+    let num_order = parseInt($('.week.actual').attr('data-order'))
+    console.log('nextxt weaaaaek ', num_order)
+
+
+
+
+  })
+
 
 })
