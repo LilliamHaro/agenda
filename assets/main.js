@@ -288,7 +288,7 @@ $(document).ready(function () {
     container.append(month)
 
     let containerWeek = $('.week_list')
-    let weekGroup = $(`<div id="week_` + year_2019[i].name + `"  data-numWeeksPerMonth = ` + NumWeekPerMonth + ` class="week_item">
+    let weekGroup = $(`<div id="week_` + year_2019[i].name + `"  data-numWeeksPerMonth = ` + NumWeekPerMonth + ` data-monthposition="` + (i + 1) + `"  class="week_item">
       <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
       <ul class="week_item_header">
         <li>LU</li>
@@ -467,6 +467,7 @@ $(document).ready(function () {
       $('.month_item:nth-child(' + next_num_order + ')').removeClass('before')
       $('.month_item:nth-child(' + next_num_order + ')').addClass('actual')
 
+
     }
   })
 
@@ -476,12 +477,59 @@ $(document).ready(function () {
   $('#plus_week').on('click', function () {
 
 
-    let num_order = parseInt($('.week.actual').attr('data-order'))
+    // mes actual 
+    let actual_week_month = $('.week_item.actual')
+    let actual_week_month_position = $('.week_item.actual').attr('data-monthposition')
+    let limit_weeks_month = parseInt(actual_week_month.attr('data-numweekspermonth'))
 
-    // buscar el limite de semana activas del mes actual 
-    let limit_weeks_month = 6
-    let next_num_order = num_order + 1 > 12 ? 1 : num_order + 1
-    console.log('nextxt week ', num_order)
+
+    let num_order = parseInt($('.week_item:nth-child(' + actual_week_month_position + ')').find('.week.actual').attr('data-order'))
+    let next_num_order = num_order + 1 > limit_weeks_month ? 1 : num_order + 1
+    console.log('next_nummmmmmm', next_num_order)
+
+
+    if (next_num_order == 1) {
+      // cambiar el mes 
+
+    } else {
+      $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + num_order + ')').removeClass('actual')
+      $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + num_order + ')').addClass('before')
+      $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + next_num_order + ')').addClass('actual')
+      $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + next_num_order + ')').removeClass('after before')
+    }
+
+
+
+    // semana actual
+
+
+
+
+
+
+    // if (num_order === 1) {
+    //   // cambiar al siguiente mes 
+    //   // next_num_order =
+
+    //   actual_week_month.removeClass()
+    //   if () {
+    //     // num del mes es mayor a 12 cambiar a 1
+    //   }
+
+    // moistrar la primera semana  
+
+
+
+
+    // } else {
+    //   // next week 
+
+
+
+
+    // }
+
+
 
   })
 
