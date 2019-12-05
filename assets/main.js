@@ -476,7 +476,6 @@ $(document).ready(function () {
   // next week 
   $('#plus_week').on('click', function () {
 
-
     // mes actual 
     let actual_week_month = $('.week_item.actual')
     let actual_week_month_position = parseInt($('.week_item.actual').attr('data-monthposition'))
@@ -539,35 +538,73 @@ $(document).ready(function () {
 
 
 
-    // semana actual
+  })
 
 
+  // prev week 
+  $('#minus_week').on('click', function () {
+
+    // mes actual 
+    let actual_week_month = $('.week_item.actual')
+    let actual_week_month_position = parseInt($('.week_item.actual').attr('data-monthposition'))
 
 
+    let limit_prev_weeks_month = parseInt($('.week_item:nth-child(' + (actual_week_month_position - 1) + ')').attr('data-monthposition'))
+    // let limit_weeks_month = parseInt(actual_week_month.attr('data-numweekspermonth'))
 
 
-    // if (num_order === 1) {
-    //   // cambiar al siguiente mes 
-    //   // next_num_order =
+    // let num_order = parseInt($('.week_item:nth-child(' + actual_week_month_position + ')').find('.week.actual').attr('data-order'))
+    // let next_num_order = num_order - 1 < 1 ? limit_prev_weeks_month : num_order - 1
+    // console.log('next_nummmmmmm looooooo febbb', limit_prev_weeks_month, next_num_order)
 
-    //   actual_week_month.removeClass()
-    //   if () {
-    //     // num del mes es mayor a 12 cambiar a 1
+
+    // if (next_num_order == 1) {
+    //   // cambiar el mes 
+
+    //   let next_week_month_position = actual_week_month_position + 1 > 12 ? 1 : actual_week_month_position + 1
+
+    //   if (next_week_month_position == 1) {
+    //     $('.week_item').removeClass('before')
+    //     $('.week_item').addClass('after')
+    //     $('.week_item:nth-child(1)').addClass('actual')
+    //     $('.week_item:nth-child(1)').removeClass('after')
+
+    //     $('.week_item .week').removeClass('before')
+    //     $('.week_item .week').addClass('after')
+
+    //     $('.week_item:nth-child(1) .week:nth-child(1)').addClass('actual')
+    //     $('.week_item:nth-child(1) .week:nth-child(1)').removeClass('after')
+
+
+    //   } else {
+    //     // cambiara al siguiente mes 
+
+
+    //     $('.week_item:nth-child(' + actual_week_month_position + ')').removeClass('actual')
+    //     $('.week_item:nth-child(' + actual_week_month_position + ')').addClass('before')
+
+    //     $('.week_item:nth-child(' + next_week_month_position + ')').addClass('actual')
+    //     $('.week_item:nth-child(' + next_week_month_position + ')').removeClass('after')
+
+    //     // remueve el actual de la ultima semanand el mes anterior
+
+    //     $('.week_item:nth-child(' + actual_week_month_position + ') .week:last-child').removeClass('actual after')
+    //     $('.week_item:nth-child(' + actual_week_month_position + ') .week:nth-child(' + num_order + ')').removeClass('actual')
+    //     $('.week_item:nth-child(' + actual_week_month_position + ') .week:nth-child(' + num_order + ')').addClass('before')
+
+    //     $('.week_item:nth-child(' + next_week_month_position + ') .week:nth-child(1)').addClass('actual')
+    //     $('.week_item:nth-child(' + next_week_month_position + ') .week:nth-child(1)').removeClass('after')
+    //     console.log('itss heree', 'next ')
+
     //   }
-
-    // moistrar la primera semana  
-
-
 
 
     // } else {
-    //   // next week 
-
-
-
-
+    //   $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + num_order + ')').removeClass('actual')
+    //   $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + num_order + ')').addClass('before')
+    //   $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + next_num_order + ')').addClass('actual')
+    //   $('.week_item:nth-child(' + actual_week_month_position + ')').find('.week:nth-child(' + next_num_order + ')').removeClass('after before')
     // }
-
 
 
   })
