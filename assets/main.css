@@ -100,6 +100,7 @@
   top: 0;
   left: 0;
   background: powderblue;
+  transition: all 0.5s;
 }
 .week_item_body .week li {
   width: 14.28%;
