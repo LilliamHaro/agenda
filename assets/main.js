@@ -268,9 +268,13 @@ $(document).ready(function () {
     let container = $('.month_list')
 
     let NumWeekPerMonth = Math.ceil((((year_2019[i].firstNameDay) - 1) + year_2019[i].numDays) / 7)
+    let prevMonth_position = i - 1 < 0 ? 11 : i - 1
+    console.log('xxxx', prevMonth_position)
+    let prevNumWeekPerMonth = Math.ceil((((year_2019[prevMonth_position].firstNameDay) - 1) + year_2019[i].numDays) / 7)
+    let is_last_week_full = ((year_2019[i].firstNameDay - 1) + year_2019[i].numDays) % 7 === 0 ? true : false
 
     let month = $(`
-    <div id="month_`+ year_2019[i].name + `" data-numWeeksPerMonth = ` + NumWeekPerMonth + ` data-order="` + (i + 1) + `" class="month_item"> 
+    <div id="month_`+ year_2019[i].name + `"data-prevMonthWeeks="` + prevNumWeekPerMonth + `" data-numWeeksPerMonth = ` + NumWeekPerMonth + ` data-order="` + (i + 1) + `" data_isLastWeekFull="` + is_last_week_full + `" class="month_item"> 
     <h3 class="month_item_name">`+ year_2019[i].name + `</h3>
     <ul class="month_item_head">
           <li>LU</li>
@@ -332,10 +336,14 @@ $(document).ready(function () {
     for (var j = 0; j < year_2019[i].numDays; j++) {
       let codeWeek = Math.ceil((year_2019[i].firstNameDay + j) / 7)
 
-      let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
-      let data_day_for_week = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + '" >' + (j + 1) + '</li>')
+      let data_day = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + ' >' + (j + 1) + '</li>')
+      let data_day_for_week = $('<li data-codedmy ="' + (j + 1) + "_" + (i + 1) + "_" + actualYear + '" data-weekNum=' + codeWeek + ' >' + (j + 1) + '</li>')
       //  filling month days 
       container_days.append(data_day)
+
+
+
+
 
       // filling week days 
       if (codeWeek === 1) {
@@ -385,11 +393,27 @@ $(document).ready(function () {
       $('.week_item:nth-child(' + i + ') ').addClass('before')
       $('.week_item:nth-child(' + i + ') .week_item_body .week').addClass('before')
 
+      if (i == (actualMonth - 1)) {
+
+        let limit_week_prev_month = parseInt($('.month_item:nth-child(' + i + ')').attr('data-numweekspermonth'))
+        $('.month_item:nth-child(' + i + ')').addClass('prev')
+        $('.month_item:nth-child(' + i + ') .month_item_body li[data-weeknum="' + limit_week_prev_month + '"]').addClass('last_week_days')
+
+      }
+
     } else if (i > actualMonth) {
       $('.month_item:nth-child(' + i + ')').addClass('after')
 
       $('.week_item:nth-child(' + i + ') ').addClass('after')
       $('.week_item:nth-child(' + i + ') .week_item_body .week').addClass('after')
+
+      if (i == (actualMonth + 1)) {
+        $('.month_item:nth-child(' + i + ')').addClass('next limit_pre')
+        // let limit_week_actual_month = parseInt($('.month_item:nth-child(' + actualMonth + ')').attr('data-numweekspermonth'))
+
+        // $('.month_item:nth-child(' + i + ')').attr('data-actulimitnumweeks', limit_week_actual_month)
+      }
+
     }
     else if (i == actualMonth) {
 
@@ -406,8 +430,13 @@ $(document).ready(function () {
         if (j < code_actual_week) {
           $('.week_item:nth-child(' + i + ')').find('.week_item_body .week:nth-child(' + j + ')').addClass('before')
 
+
+
+
         } else if (j > code_actual_week) {
           $('.week_item:nth-child(' + i + ')').find('.week_item_body .week:nth-child(' + j + ')').addClass('after')
+
+
 
 
         } else if (j == code_actual_week) {
@@ -431,18 +460,39 @@ $(document).ready(function () {
 
     let num_order = parseInt($('.month_item.actual').attr('data-order'))
     let prev_num_order = num_order - 1 < 1 ? 12 : num_order - 1
+    let new_prev_num_order = num_order - 2 < 1 ? 12 : num_order - 2
+    let actual_next_month = num_order + 1 > 12 ? 1 : num_order + 1
 
     if (prev_num_order === 12) {
       $('.month_item').removeClass('after actual')
       $('.month_item').addClass('before')
       $('.month_item:last-child').addClass('actual')
       $('.month_item:last-child').removeClass('before')
+
+
     } else {
       $('.month_item:nth-child(' + num_order + ')').removeClass('actual')
-      $('.month_item:nth-child(' + num_order + ')').addClass('after')
-      $('.month_item:nth-child(' + prev_num_order + ')').removeClass('before')
-      $('.month_item:nth-child(' + prev_num_order + ')').removeClass('after')
+      $('.month_item:nth-child(' + num_order + ')').addClass('after next')
+      $('.month_item:nth-child(' + prev_num_order + ')').removeClass('before after prev')
+      $('.month_item:nth-child(' + prev_num_order + ') .month_item_body li').removeClass('last_week_days')
       $('.month_item:nth-child(' + prev_num_order + ')').addClass('actual')
+
+      // let newactualmonthWeeks = $('.month_item:nth-child(' + prev_num_order + ')').attr('data-numweekspermonth')
+      // $('.month_item:nth-child(' + num_order + ')').attr('data-actulimitnumweeks', newactualmonthWeeks)
+      // console.log('aaaaaaaaaaaaaadddddddddddddddddd', newactualmonthWeeks)
+
+
+      $('.month_item:nth-child(' + actual_next_month + ')').removeClass('next')
+
+      // poner prev al nuevo mes anterior 
+
+      let limit_week_new_prev_num_order = parseInt($('.month_item:nth-child(' + new_prev_num_order + ')').attr("data-numweekspermonth"))
+      $('.month_item:nth-child(' + new_prev_num_order + ')').addClass('prev')
+
+      // determinar lo dias de us ultima semana poner le la clas esa
+
+      $('.month_item:nth-child(' + new_prev_num_order + ') .month_item_body li[data-weeknum="' + limit_week_new_prev_num_order + '"]').addClass('last_week_days')
+
     }
 
   })

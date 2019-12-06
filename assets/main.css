@@ -13,12 +13,13 @@
   padding: 30px;
 }
 .month_list {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   width: 350px;
-  height: 372px;
+  height: 400px;
   overflow: hidden;
+  background: palevioletred;
 }
 
 .month_item {
@@ -26,9 +27,19 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: auto;
-  background: red;
+  height: 100%;
+  /* background: red; */
   transition: all 0.5s;
+}
+
+.month_item_name {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.month_item_head {
+  height: 50px;
 }
 
 .month_item ul {
@@ -53,6 +64,7 @@
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 .week_item {
@@ -158,4 +170,65 @@
 
 .after {
   transform: translateX(100%);
+}
+
+.month_item.after {
+  transform: translateY(100%);
+}
+
+.month_item.before {
+  transform: translateY(calc(-100%));
+}
+
+.month_item.prev:not([data_islastweekfull="true"]) {
+  transform: translateY(calc(-100% + 150px));
+}
+
+.month_item.prev .month_item_body li {
+  opacity: 0;
+}
+.month_item.prev .month_item_body .last_week_days {
+  opacity: 0.5;
+}
+
+.month_item.prev .month_item_head,
+.month_item.prev .month_item_name {
+  opacity: 0;
+}
+
+/* .month_item.next {
+  transform: translateY(calc(100% - 200px));
+} */
+
+.month_item.next[data-prevmonthweeks="4"] {
+  /* transform: translateY(calc(100% - 250px)); */
+  margin-top: -250px;
+}
+.month_item.next[data-prevmonthweeks="5"] {
+  /* transform: translateY(calc(100% - 200px)); */
+  margin-top: -150px;
+}
+.month_item.next[data-prevmonthweeks="6"] {
+  margin-top: -100px;
+
+  /* transform: translateY(calc(100% - 150px)); */
+}
+
+.month_item.next[data-prevmonthweeks="5"]:not([data_islastweekfull="true"]) {
+  /* transform: translateY(calc(100% - 200px)); */
+  margin-top: -200px;
+}
+.month_item.next[data-prevmonthweeks="6"]:not([data_islastweekfull="true"]) {
+  margin-top: -150px;
+
+  /* transform: translateY(calc(100% - 150px)); */
+}
+
+.month_item.next .month_item_head,
+.month_item.next .month_item_name {
+  opacity: 0;
+}
+
+.month_item.next .month_item_body li {
+  opacity: 0.5;
 }
