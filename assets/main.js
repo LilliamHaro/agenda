@@ -672,4 +672,131 @@ $(document).ready(function () {
   })
 
 
+
+
+
+  // corner month 
+
+  var d = new Date()
+  var actual_year = d.getFullYear();
+  var actual_month = d.getMonth() + 1;
+
+  // recorrer años
+  for (var i = 0; i < years_used.length; i++) {
+    let year_name = years_used[i].year_num
+    let year_months = years_used[i].months
+
+    // recorrer meses 
+    for (var j = 0; j < year_months.length; j++) {
+
+      let code_month = (year_name) + "-" + (j + 1)
+      let name_month = year_months[j].name + ' del ' + year_name;
+      let order_month = j + 1;
+      let numDays_month = year_months[j].numDays;
+      let blur_firstDays = year_months[j].firstDayPosition - 1;
+      let numWeeks_month = Math.ceil((blur_firstDays + numDays_month) / 7);
+      let status_month = ''
+
+      if (year_name < actual_year) {
+        status_month = 'before'
+        if (actual_month == 1 && order_month == 12) {
+          status_month = 'before prev'
+        }
+
+      } else if (year_name > actual_year) {
+        status_month = 'after'
+
+        if (actual_month == 12 && order_month == 1) {
+          status_month = 'after next'
+        }
+
+
+      } else if (year_name == actual_year) {
+
+        if (order_month < actual_month) {
+          status_month = 'before'
+          if (order_month == (actual_month - 1) && (actual_month - 1) >= 1) {
+            status_month = 'before prev'
+          }
+
+        } else if (order_month > actual_month) {
+          status_month = 'after'
+
+          if (order_month == (actual_month + 1) && (actual_month - 1) <= 12) {
+
+            status_month = 'before next'
+          }
+
+
+        } else if (order_month == actual_month) {
+          status_month = 'actual'
+          $('.month_corner .month_item_name').text(name_month)
+
+        }
+
+      }
+
+      // llenar meses 
+      let plantilla = $('<div style="height:' + (numWeeks_month * 50) + 'px" class="month_item_body ' + status_month + '" data-id="' + code_month + '" data-year="' + year_name + '" data-order="' + order_month + '" data-nameMonth="' + name_month + ' "></div>')
+      $('.month_corner').append(plantilla)
+
+      // llenar dias
+      for (var k = 0; k < blur_firstDays; k++) {
+        let void_days = $('<li></li>')
+        $('.month_item_body[data-id="' + code_month + '"]').append(void_days)
+      }
+      for (var l = 0; l < numDays_month; l++) {
+        let code_day = code_month + '_' + (l + 1)
+        let full_days = $('<li data-codeDay="' + code_day + '">' + (l + 1) + '</li>')
+        $('.month_item_body[data-id="' + code_month + '"]').append(full_days)
+
+      }
+
+    }
+
+  }
+
+
+  $('.prev_month').on('click', function () {
+    let actual_month_id = $('.month_item_body.actual').attr('id')
+    let actual_month_order = parseInt($('.month_item_body.actual').attr('data-order'))
+    let actual_year_order = parseInt($('.month_item_body.actual').attr('data-year'))
+
+    let new_prev_month = actual_month_order - 2 < 1 ? 12 : actual_month_order - 1
+    let new_actual_month = actual_month_order - 2 < 1 ? 12 : actual_month_order - 1
+    let new_next_month = actual_month_order
+
+    let old_next_month = actual_month_order + 1
+
+    let new_month_name = $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_actual_month + '"]').attr('data-namemonth')
+
+
+    if (new_actual_month == 1) {
+
+    } else {
+      $('.month_corner .month_item_name').text(new_month_name)
+
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_next_month + '"]').removeClass('actual')
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_next_month + '"]').addClass('after next')
+
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_actual_month + '"]').removeClass('before prev')
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_actual_month + '"]').addClass('actual')
+
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + new_prev_month + '"]').addClass('prev')
+
+      $('.month_item_body[data-year="' + actual_year_order + '"][data-order="' + old_next_month + '"]').removeClass('next')
+
+
+
+
+    }
+
+
+
+
+
+
+  })
+
+
 })
