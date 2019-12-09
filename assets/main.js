@@ -26,13 +26,16 @@ $(document).ready(function () {
 
         let id = $(this).attr('id').replace('add_', '');
         database.ref('users/' + userId + '/_tasks/' + id + '').push().set({
-          content: "aaaaa",
+          content: "aaaaahhh grtgdkfjgkj dgkdkflgdf ldkfglkdfglkfg dkljgdlkgfdgk",
           status: 'hacer',
           num_order: 1,
-          tipo: 'siempre'
+          tipo: 'siempre',
+          id: "xxxx"
         })
 
       })
+
+      // MOSTRAR TAREAS
 
       let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
       for (var i = 0; i < array_days.length; i++) {
@@ -43,11 +46,20 @@ $(document).ready(function () {
           var taskDay_item = datasnapshot.val()
           let task_plantilla = '<li>' + taskDay_item.content + '</li>'
           console.log('plantilaaa', task_plantilla)
-          $('.' + array_days_item + '').append(task_plantilla)
+          $('.' + array_days_item + ' .day_body').append(task_plantilla)
         });
 
 
       }
+
+      // BORRAR TAREA 
+
+      // para llegar a la tarea 
+      // id user 
+      // dia 
+      // id 
+
+      // $('.day_body li').
 
 
 

@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* html,
@@ -59,4 +60,35 @@ body {
 .day_button {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000;
+}
+
+.day_body {
+  height: calc(100% - 100px);
+  overflow: scroll;
+  padding: 15px;
+  list-style: none;
+}
+
+.day_body li {
+  padding: 8px;
+  background: #0005;
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.day_body li:after {
+  content: "X";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0005;
+  color: #fff;
 }
