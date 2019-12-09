@@ -34,7 +34,7 @@ $(document).ready(function () {
 
       })
 
-      let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabados', 'domingo']
+      let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
       for (var i = 0; i < array_days.length; i++) {
 
         let array_days_item = array_days[i]
