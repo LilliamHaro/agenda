@@ -1,314 +1,62 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
+
+/* html,
+body {
+  height: 100%;
+} */
 .menu_dashboard {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   height: 100vh;
   width: 270px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.8);
   padding: 30px;
-}
-.month_list {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 350px;
-  height: 400px;
-  overflow: hidden;
-  background: palevioletred;
-}
-
-.month_item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background: red; */
-  transition: all 0.5s;
-}
-
-.month_item_name {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.month_item_head {
-  height: 50px;
-}
-
-.month_item ul {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
-}
-
-.month_item ul li {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.week_list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-}
-
-.week_item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  background: plum;
-  flex-direction: column;
-  position: absolute;
-  /* top: 0;
-  left: 0; */
-  overflow: hidden;
-  transition: all 0.5s;
-}
-
-.week_item.before,
-.week_item.after {
-  opacity: 0;
-}
-
-.week_item_header,
-.week_item_body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  width: 100%;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.week_item_body {
-  height: 65vh;
-  min-height: 385px;
-}
-
-.week_item_body .week {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  list-style: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: powderblue;
-  transition: all 0.5s;
-}
-.week_item_body .week li {
-  width: 14.28%;
-  height: 65vh;
-  min-height: 385px;
-  padding: 15px;
-  border-left: 1px solid #000;
-}
-
-.week_item_body .week li:nth-child(1) {
-  border-left: 1px solid transparent;
-}
-
-.week_item_header li {
-  width: 14.28%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  border-left: 1px solid #000;
-}
-.week_item_header li:nth-child(1) {
-  border-left: none;
-}
-.day_head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-}
-
-.addTaskBlock {
-  display: none;
-}
-#plus {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 999999;
-  width: 100px;
-  height: 100px;
-}
-#minus {
-  position: absolute;
-  bottom: 0;
-  left: 100px;
-  z-index: 999999;
-  width: 100px;
-  height: 100px;
-}
-
-.month_item.after {
-  transform: translateY(100%);
-}
-
-.month_item.before {
-  transform: translateY(calc(-100%));
-}
-
-.month_item.prev:not([data_islastweekfull="true"]) {
-  transform: translateY(calc(-100% + 150px));
-}
-
-.month_item.prev .month_item_body li {
-  opacity: 0;
-}
-.month_item.prev .month_item_body .last_week_days {
-  opacity: 0.5;
-}
-
-.month_item.prev .month_item_head,
-.month_item.prev .month_item_name {
-  opacity: 0;
-}
-
-/* .month_item.next {
-  transform: translateY(calc(100% - 200px));
-} */
-
-.month_item.next[data-prevmonthweeks="4"] {
-  /* transform: translateY(calc(100% - 250px)); */
-  margin-top: -250px;
-}
-.month_item.next[data-prevmonthweeks="5"] {
-  /* transform: translateY(calc(100% - 200px)); */
-  margin-top: -150px;
-}
-.month_item.next[data-prevmonthweeks="6"] {
-  margin-top: -100px;
-
-  /* transform: translateY(calc(100% - 150px)); */
-}
-
-.month_item.next[data-prevmonthweeks="5"]:not([data_islastweekfull="true"]) {
-  /* transform: translateY(calc(100% - 200px)); */
-  margin-top: -200px;
-}
-.month_item.next[data-prevmonthweeks="6"]:not([data_islastweekfull="true"]) {
-  margin-top: -150px;
-
-  /* transform: translateY(calc(100% - 150px)); */
-}
-
-.month_item.next .month_item_head,
-.month_item.next .month_item_name {
-  opacity: 0;
-}
-
-.month_item.next .month_item_body li {
-  opacity: 0.5;
-}
-
-/* ----------------------------------------------------------------------------------------------------- */
-.before {
-  transform: translateX(-100%);
-}
-
-.after {
-  transform: translateX(100%);
-}
-
-.month_corner .before.prev {
-  transform: translateY(calc(-100% + 50px));
-  opacity: 0.5;
-}
-
-.month_corner .after.next {
-  transform: translateY(calc(100% - 0px));
-  opacity: 0.5;
-}
-
-.month_corner {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 350px;
-  height: 400px;
-  overflow: hidden;
-}
-
-.arrows_month {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 60px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.arrows_month div {
-  width: 50%;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 100;
   color: #fff;
 }
 
-.month_corner li {
-  width: 50px;
+.dashboard {
+  padding: 50px;
+}
+
+.week_item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 70vh;
+  min-height: 500px;
+  border: 1px solid #000;
+}
+
+.week_item .day {
+  width: 14.28%;
+  height: 100%;
+  border-right: 1px solid #000;
+}
+.week_item .day:last-child {
+  border-right: none;
+}
+
+.day_head {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.day_button button {
+  width: 100%;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.month_item_name {
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: purple;
-  position: relative;
-  z-index: 1;
-}
-.month_item_head {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: plum;
-  position: relative;
-  z-index: 1;
-}
-
-.month_item_body {
-  position: absolute;
-  top: 100px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
+.day_button {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
