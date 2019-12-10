@@ -229,3 +229,15 @@ $(document).ready(function () {
 
 
 })
+
+
+
+
+// ui 
+
+// levantar los iconos del edit y deleted en hove 
+// delted y otras opciones estan en un mini submenu 
+// hay una opcion de copiar la tarjeta 
+// editar abre un minimodal  
+// agregar es un unico boton para todos 
+
