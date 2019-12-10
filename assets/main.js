@@ -23,15 +23,18 @@ $(document).ready(function () {
       // AGREGAR TAREA 
 
       $('.day_button button').on('click', function () {
-
+        let g = new Date()
         let id = $(this).attr('id').replace('add_', '');
+        let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
+
         database.ref('users/' + userId + '/_tasks/' + id + '').push().set({
           content: "aaaaahhh grtgdkfjgkj dgkdkflgdf ldkfglkdfglkfg dkljgdlkgfdgk",
           status: 'hacer',
           num_order: 1,
           tipo: 'siempre',
-          id: "xxxx"
+          id: id_task,
         })
+
 
       })
 
@@ -44,7 +47,7 @@ $(document).ready(function () {
 
         database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
           var taskDay_item = datasnapshot.val()
-          let task_plantilla = '<li>' + taskDay_item.content + '</li>'
+          let task_plantilla = '<li class="task " data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"  >' + taskDay_item.content + ' <span class="cross">X</span></li>'
           console.log('plantilaaa', task_plantilla)
           $('.' + array_days_item + ' .day_body').append(task_plantilla)
         });
@@ -54,12 +57,20 @@ $(document).ready(function () {
 
       // BORRAR TAREA 
 
-      // para llegar a la tarea 
-      // id user 
-      // dia 
-      // id 
+      $('.day_body').on('click', '.task .cross', function () {
 
-      // $('.day_body li').
+        let task_day = $(this).parent().attr('data-day')
+        let task_id = $(this).parent().attr('data-id')
+        $(this).parent().hide()
+
+        database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
+          let task = datasnapshot.val()
+          let task_key = datasnapshot.key
+          if (task.id == task_id) {
+            database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).remove()
+          }
+        })
+      })
 
 
 

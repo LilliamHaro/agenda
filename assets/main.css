@@ -78,8 +78,7 @@ body {
   position: relative;
 }
 
-.day_body li:after {
-  content: "X";
+.day_body li .cross {
   position: absolute;
   top: 0;
   right: 0;
