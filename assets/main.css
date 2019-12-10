@@ -91,3 +91,16 @@ body {
   background: #0005;
   color: #fff;
 }
+.day_body li .edit {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 14px;
+  height: 14px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0005;
+  color: #fff;
+}

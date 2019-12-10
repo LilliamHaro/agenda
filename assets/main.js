@@ -47,7 +47,7 @@ $(document).ready(function () {
 
         database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
           var taskDay_item = datasnapshot.val()
-          let task_plantilla = '<li class="task " data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"  >' + taskDay_item.content + ' <span class="cross">X</span></li>'
+          let task_plantilla = '<li class="task " data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
           console.log('plantilaaa', task_plantilla)
           $('.' + array_days_item + ' .day_body').append(task_plantilla)
         });
@@ -73,12 +73,40 @@ $(document).ready(function () {
       })
 
 
+      // EDITAR TAREA 
+
+      $('.day_body').on('click', '.task .edit', function () {
+        let task_day = $(this).parent().attr('data-day')
+        let task_id = $(this).parent().attr('data-id')
+
+        $(this).parent().find('.content').text('new content 222')
+
+
+        database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
+          let task = datasnapshot.val()
+          let task_key = datasnapshot.key
+          if (task.id == task_id) {
+            database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).set({
+              content: "new content 222",
+              status: 'hacer',
+              num_order: 1,
+              tipo: 'siempre',
+              id: task_id,
+            })
+          }
+        })
+
+      })
+
+
 
     } else {
       $('.init').show()
       $('.dashboard').hide()
     }
   })
+
+
 
 
   // GUARDAR DATOS EN LA BASE DATOS DURANTE EL REGISTRO 
