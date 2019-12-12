@@ -3,6 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* helpers */
+
+.opacity-0 {
+  opacity: 0;
+}
+.display-none {
+  display: none !important;
+}
 .dashboard {
   display: flex;
   justify-content: space-between;
@@ -11,25 +20,54 @@
 
 .menu_dashboard {
   height: 100vh;
-  width: 270px;
+  width: 220px;
   background: rgba(0, 0, 0, 0.8);
   padding: 30px;
   z-index: 100;
   color: #fff;
 }
 
-.menu_dashboard_rigth {
+.dashboard_rigth {
   height: 100vh;
-  width: 150px;
+  width: 220px;
   background: rgba(0, 0, 0, 0.8);
   padding: 30px;
   z-index: 100;
   color: #fff;
 }
 
+.dashboard_nav {
+  position: absolute;
+  top: 0;
+  left: 220px;
+  width: calc(100% - 220px);
+  height: 50px;
+  background: plum;
+  z-index: 500;
+}
+.dashboard_nav_center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_open_add_task {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  color: #fff;
+  background: pink;
+  margin-top: -10px;
+}
 .week_list {
-  width: calc(100% - 420px);
-  height: calc(100vh - 100px);
+  width: calc(100% - 440px);
+  height: 100vh;
+  padding-top: 50px;
 }
 
 .week_item {
@@ -37,15 +75,58 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100%;
+  height: calc(100% - 50px);
   min-height: 500px;
-  border: 1px solid #000;
+  position: relative;
+}
+
+.line_horizontal {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  height: 1px;
+}
+.week_item .line {
+  position: absolute;
+  top: 50px;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.8);
+  height: calc(100% - 50px);
+}
+
+.week_item .line:nth-child(1) {
+  left: 14.28%;
+}
+
+.week_item .line:nth-child(2) {
+  left: 28.56%;
+}
+.week_item .line:nth-child(3) {
+  left: 42.84%;
+}
+.week_item .line:nth-child(4) {
+  left: 57.12%;
+}
+.week_item .line:nth-child(5) {
+  left: 71.4%;
+}
+.week_item .line:nth-child(6) {
+  left: 85.68%;
+}
+
+.week_item_title {
+  width: 100%;
+  height: 50px;
+  padding: 10px 20px 0 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .week_item .day {
   width: 14.28%;
   height: 100%;
-  border-right: 1px solid #000;
 }
 .week_item .day:last-child {
   border-right: none;
@@ -111,4 +192,24 @@
   align-items: center;
   background: #0005;
   color: #fff;
+}
+
+.modal_add_task {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999999;
+  transition: all 0.5s;
+}
+
+.modal_add_task_box {
+  width: 450px;
+  padding: 25px;
+  background: #fff;
 }

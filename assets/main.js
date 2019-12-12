@@ -38,6 +38,35 @@ $(document).ready(function () {
 
       })
 
+
+      $('#open_add_task').on('click', function () {
+        $('.modal_add_task').removeClass('display-none')
+        setTimeout(function () {
+          $('.modal_add_task').removeClass('opacity-0')
+        }, 50)
+      })
+
+
+      $('#add_task').on('click', function () {
+
+        let content = $('#new_task_content').val()
+        let status = $('#new_task_status').val()
+        let tipo = $('#new_task_tipo').val()
+        let day = $('#new_task_day').val()
+        let g = new Date()
+
+        let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
+
+        database.ref('users/' + userId + '/_tasks/' + day + '').push().set({
+          content: content,
+          status: status,
+          num_order: 1,
+          tipo: tipo,
+          id: id_task,
+        })
+
+      })
+
       // MOSTRAR TAREAS
 
       let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
@@ -79,7 +108,46 @@ $(document).ready(function () {
         let task_day = $(this).parent().attr('data-day')
         let task_id = $(this).parent().attr('data-id')
 
-        $(this).parent().find('.content').text('new content 222')
+        $('.modal_add_task').removeClass('display-none')
+        $('.modal_add_task_box').attr('data-id', task_id)
+        $('.modal_add_task_box').attr('data-day', task_day)
+
+        setTimeout(function () {
+          $('.modal_add_task').removeClass('opacity-0')
+        }, 50)
+
+        // $(this).parent().find('.content').text('new content 222')
+
+
+        // database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
+        //   let task = datasnapshot.val()
+        //   let task_key = datasnapshot.key
+        //   if (task.id == task_id) {
+        //     database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).set({
+        //       content: "new content 222",
+        //       status: 'hacer',
+        //       num_order: 1,
+        //       tipo: 'siempre',
+        //       id: task_id,
+        //     })
+        //   }
+        // })
+
+      })
+
+
+
+      $('#edit_task').on('click', function () {
+
+        let task_id = $('.modal_add_task_box').attr('data-id')
+        let task_day = $('.modal_add_task_box').attr('data-day')
+
+        let content = $('#edit_task_content').val()
+        let status = $('#edit_task_status').val()
+        let tipo = $('#edit_task_tipo').val()
+
+
+        // $(this).parent().find('.content').text('new content 222')
 
 
         database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
@@ -87,16 +155,19 @@ $(document).ready(function () {
           let task_key = datasnapshot.key
           if (task.id == task_id) {
             database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).set({
-              content: "new content 222",
-              status: 'hacer',
+              content: content,
+              status: status,
               num_order: 1,
-              tipo: 'siempre',
+              tipo: tipo,
               id: task_id,
             })
           }
+        }).the(function () {
+          console.log('jjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
         })
-
       })
+
+
 
 
 

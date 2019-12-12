@@ -52,23 +52,46 @@
 
     </div>
 
+    <div class="dashboard_nav">
+
+      <div class="dashboard_nav_center">
+        <button id="open_add_task" class="btn_open_add_task">+</button>
+
+      </div>
+    </div>
+
 
 
 
 
     <section class="week_list">
 
+      <div class="week_item_title">
+        Diciembre 2019
+      </div>
+
       <div class="week_item">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line_horizontal"></span>
+
+
+
+
 
         <div class="day lunes">
           <div class="day_head">
             Lunes
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_lunes">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
           </div>
         </div>
@@ -77,11 +100,11 @@
           <div class="day_head">
             Martes
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_martes">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
 
@@ -94,11 +117,11 @@
           <div class="day_head">
             Miercoles
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_miercoles">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
 
@@ -109,11 +132,11 @@
           <div class="day_head">
             Jueves
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_jueves">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
           </div>
@@ -124,11 +147,11 @@
           <div class="day_head">
             Viernes
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_viernes">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
           </div>
@@ -138,11 +161,11 @@
           <div class="day_head">
             Sabado
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_sabado">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
 
@@ -153,27 +176,117 @@
           <div class="day_head">
             Domingo
           </div>
-          <div class="day_button">
+          <!-- <div class="day_button">
             <button id="add_domingo">
               agregrar
             </button>
-          </div>
+          </div> -->
           <div class="day_body">
 
           </div>
         </div>
     </section>
 
-    <div class="menu_dashboard_rigth">
-      <h1>Dashboard</h1>
-      <h3 id="user_name"></h3>
-      <h3 id="user_email"></h3>
+    <div class="dashboard_rigth">
 
-      <button type="button" id="logout">Salir</button>
 
     </div>
 
 
+
+  </section>
+
+
+  <section id="modal_add_task" class="modal_add_task opacity-0 display-none">
+
+    <div class="modal_add_task_box">
+      <h2>Add task</h2>
+      <div>
+        <select name="" id="new_task_day">
+          <option value="lunes">Lunes</option>
+          <option value="martes">Martes </option>
+          <option value="miercoles">Miercoles</option>
+          <option value="jueves">Jueves</option>
+          <option value="viernes">Viernes</option>
+          <option value="sabado">Sabado</option>
+          <option value="domingo">Domingo</option>
+        </select>
+      </div>
+      <div>
+        <select name="" id="new_task_tipo">
+          <option value="always">Siempre</option>
+          <option value="sometimes">A veces</option>
+        </select>
+      </div>
+
+      <div>
+        <select name="" id="new_task_status">
+          <option value="to_do">To Do</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div>
+        <textarea name="" id="new_task_content" cols="30" rows="10"> </textarea>
+      </div>
+
+      <div>
+        <button id="add_task">Add Task</button>
+      </div>
+
+
+
+
+
+
+    </div>
+
+  </section>
+
+
+  <section id="modal_edit_task" class="modal_add_task opacity-0 display-none">
+
+    <div class="modal_add_task_box">
+      <h2>Add task</h2>
+      <div>
+        <select name="" id="edit_task_day">
+          <option value="lunes">Lunes</option>
+          <option value="martes">Martes </option>
+          <option value="miercoles">Miercoles</option>
+          <option value="jueves">Jueves</option>
+          <option value="viernes">Viernes</option>
+          <option value="sabado">Sabado</option>
+          <option value="domingo">Domingo</option>
+        </select>
+      </div>
+      <div>
+        <select name="" id="edit_task_tipo">
+          <option value="always">Siempre</option>
+          <option value="sometimes">A veces</option>
+        </select>
+      </div>
+
+      <div>
+        <select name="" id="edit_task_status">
+          <option value="to_do">To Do</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div>
+        <textarea name="" id="edit_task_content" cols="30" rows="10"> </textarea>
+      </div>
+
+      <div>
+        <button id="edit_task">Add Task</button>
+      </div>
+
+
+
+
+
+
+    </div>
 
   </section>
 
