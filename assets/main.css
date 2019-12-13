@@ -192,12 +192,13 @@
 
 .day_body li {
   padding: 3px 8px 5px;
-  background: #a2c2ff;
+  background: #717fb3;
   border-radius: 4px;
   color: #fff;
   margin-bottom: 15px;
   position: relative;
   overflow: hidden;
+  word-wrap: break-word;
 }
 
 .day_body li .cross {
@@ -260,6 +261,11 @@
   width: 450px;
   padding: 25px;
   background: #fff;
+  border-radius: 5px;
+}
+
+.modal_add_task_box_title {
+  margin-bottom: 25px;
 }
 
 /* .lunes .day_body {
