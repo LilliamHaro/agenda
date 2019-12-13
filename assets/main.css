@@ -191,12 +191,13 @@
 }
 
 .day_body li {
-  padding: 8px;
-  background: #0005;
+  padding: 3px 8px 5px;
+  background: #a2c2ff;
   border-radius: 4px;
   color: #fff;
   margin-bottom: 15px;
   position: relative;
+  overflow: hidden;
 }
 
 .day_body li .cross {
@@ -211,7 +212,10 @@
   align-items: center;
   background: #0005;
   color: #fff;
+  transform: translateY(-15px);
+  transition: all 0.5s;
 }
+
 .day_body li .edit {
   position: absolute;
   top: 0;
@@ -224,8 +228,18 @@
   align-items: center;
   background: #0005;
   color: #fff;
+  transform: translateY(-15px);
+  transition: all 0.5s;
 }
 
+.day_body li:hover .edit,
+.day_body li:hover .cross {
+  transform: translateY(0px);
+}
+
+.day_body li .content {
+  font-size: 13px;
+}
 .modal_add_task,
 .modal_edit_task {
   position: fixed;
