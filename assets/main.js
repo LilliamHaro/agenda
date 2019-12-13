@@ -21,22 +21,21 @@ $(document).ready(function () {
 
 
       // AGREGAR TAREA 
+      // $('.day_button button').on('click', function () {
+      //   let g = new Date()
+      //   let id = $(this).attr('id').replace('add_', '');
+      //   let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
 
-      $('.day_button button').on('click', function () {
-        let g = new Date()
-        let id = $(this).attr('id').replace('add_', '');
-        let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
-
-        database.ref('users/' + userId + '/_tasks/' + id + '').push().set({
-          content: "aaaaahhh grtgdkfjgkj dgkdkflgdf ldkfglkdfglkfg dkljgdlkgfdgk",
-          status: 'hacer',
-          num_order: 1,
-          tipo: 'siempre',
-          id: id_task,
-        })
+      //   database.ref('users/' + userId + '/_tasks/' + id + '').push().set({
+      //     content: "aaaaahhh grtgdkfjgkj dgkdkflgdf ldkfglkdfglkfg dkljgdlkgfdgk",
+      //     status: 'hacer',
+      //     num_order: 1,
+      //     tipo: 'siempre',
+      //     id: id_task,
+      //   })
 
 
-      })
+      // })
 
 
       $('#open_add_task').on('click', function () {
@@ -56,7 +55,7 @@ $(document).ready(function () {
         let g = new Date()
 
         let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
-
+        console.log('xxxxxxxxxxxxxxxxxxxxxx', userId, day)
         database.ref('users/' + userId + '/_tasks/' + day + '').push().set({
           content: content,
           status: status,
@@ -69,23 +68,44 @@ $(document).ready(function () {
 
       // MOSTRAR TAREAS
 
-      let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
-      for (var i = 0; i < array_days.length; i++) {
 
-        let array_days_item = array_days[i]
+      function showAllActualsTask() {
+        let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
+        for (var i = 0; i < array_days.length; i++) {
 
-        database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
-          var taskDay_item = datasnapshot.val()
-          let task_plantilla = '<li class="task " data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
-          console.log('plantilaaa', task_plantilla)
-          $('.' + array_days_item + ' .day_body').append(task_plantilla)
-        });
+          let array_days_item = array_days[i]
+          database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
+            var taskDay_item = datasnapshot.val()
+            let task_plantilla = '<li class="task " data-tipo="' + taskDay_item.tipo + '" data-status="' + taskDay_item.status + '" data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
+            console.log('plantilaaa', task_plantilla)
 
+            if (!$('.day_body li[data-id="' + taskDay_item.id + '"]').length) {
+              $('.' + array_days_item + ' .day_body').append(task_plantilla)
+            } else {
+              console.log('wat', !$('.day_body li[data-id="' + taskDay_item.id + '"]').length)
+            }
+          });
 
+        }
       }
+      showAllActualsTask()
+
+      database.ref('users/' + userId + '/_tasks').on("child_changed", function (snapshot) {
+        $('.day_body li').remove();
+        showAllActualsTask()
+      });
+
+      database.ref('users/' + userId + '/_tasks').on("child_removed", function (snapshot) {
+        $('.day_body li').remove();
+        showAllActualsTask()
+      });
+
+      database.ref('users/' + userId + '/_tasks').on("child_changed", function (snapshot) {
+        $('.day_body li').remove();
+        showAllActualsTask()
+      });
 
       // BORRAR TAREA 
-
       $('.day_body').on('click', '.task .cross', function () {
 
         let task_day = $(this).parent().attr('data-day')
@@ -103,35 +123,31 @@ $(document).ready(function () {
 
 
       // EDITAR TAREA 
-
       $('.day_body').on('click', '.task .edit', function () {
         let task_day = $(this).parent().attr('data-day')
         let task_id = $(this).parent().attr('data-id')
+        let task_tipo = $(this).parent().attr('data-tipo')
+        let task_status = $(this).parent().attr('data-status')
+        let task_content = $(this).parent().find('.content').text();
 
-        $('.modal_add_task').removeClass('display-none')
-        $('.modal_add_task_box').attr('data-id', task_id)
-        $('.modal_add_task_box').attr('data-day', task_day)
+
+        $('.modal_edit_task').removeClass('display-none')
+        $('.modal_edit_task_box').attr('data-id', task_id)
+        $('.modal_edit_task_box').attr('data-old-day', task_day)
+
+
+        $('.modal_edit_task #edit_task_day').val(task_day)
+        $('.modal_edit_task #edit_task_tipo').val(task_tipo)
+        $('.modal_edit_task #edit_task_status').val(task_status)
+        $('.modal_edit_task #edit_task_content').val(task_content)
+
+
 
         setTimeout(function () {
-          $('.modal_add_task').removeClass('opacity-0')
+          $('.modal_edit_task').removeClass('opacity-0')
         }, 50)
 
         // $(this).parent().find('.content').text('new content 222')
-
-
-        // database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
-        //   let task = datasnapshot.val()
-        //   let task_key = datasnapshot.key
-        //   if (task.id == task_id) {
-        //     database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).set({
-        //       content: "new content 222",
-        //       status: 'hacer',
-        //       num_order: 1,
-        //       tipo: 'siempre',
-        //       id: task_id,
-        //     })
-        //   }
-        // })
 
       })
 
@@ -139,33 +155,75 @@ $(document).ready(function () {
 
       $('#edit_task').on('click', function () {
 
-        let task_id = $('.modal_add_task_box').attr('data-id')
-        let task_day = $('.modal_add_task_box').attr('data-day')
+        let task_id = $('.modal_edit_task_box').attr('data-id')
+        let task_day = $('.modal_edit_task #edit_task_day').val()
+        let task_old_day = $('.modal_edit_task_box').attr('data-old-day')
+
 
         let content = $('#edit_task_content').val()
         let status = $('#edit_task_status').val()
         let tipo = $('#edit_task_tipo').val()
 
 
-        // $(this).parent().find('.content').text('new content 222')
+
+        if (task_day == task_old_day) {
+
+          database.ref('users/' + userId + '/_tasks/' + task_old_day).on('child_added', function (datasnapshot) {
+            let task = datasnapshot.val()
+            let task_key = datasnapshot.key
+            console.log('dentrooo', task_id, task.id)
+
+            if (task.id == task_id) {
+              database.ref('users/' + userId + '/_tasks/' + task_old_day + '/' + task_key).set({
+                content: content,
+                status: status,
+                num_order: 1,
+                tipo: tipo,
+                id: task_id,
+              })
+
+              return false
+            }
+
+          })
+
+        } else {
+          database.ref('users/' + userId + '/_tasks/' + task_old_day).on('child_added', function (datasnapshot) {
+            let task = datasnapshot.val()
+            let task_key = datasnapshot.key
+            console.log('dentrooo', task_id, task.id)
+
+            if (task.id == task_id) {
+              database.ref('users/' + userId + '/_tasks/' + task_old_day + '/' + task_key).remove()
+              // borar en html 
+              $('.day_body li[data-id="' + task_id + '"]').hide()
+              return false
+            }
+
+          })
 
 
-        database.ref('users/' + userId + '/_tasks/' + task_day).on('child_added', function (datasnapshot) {
-          let task = datasnapshot.val()
-          let task_key = datasnapshot.key
-          if (task.id == task_id) {
-            database.ref('users/' + userId + '/_tasks/' + task_day + '/' + task_key).set({
+
+          setTimeout(function () {
+            database.ref('users/' + userId + '/_tasks/' + task_day).push().set({
               content: content,
               status: status,
               num_order: 1,
               tipo: tipo,
               id: task_id,
             })
-          }
-        }).the(function () {
-          console.log('jjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
-        })
+
+          }, 500)
+        }
+
+
+
+
       })
+
+
+
+
 
 
 
