@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
 /* helpers */
@@ -21,10 +22,31 @@
 .menu_dashboard {
   height: 100vh;
   width: 220px;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 30px;
+  background: #717fb3;
   z-index: 100;
   color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.menu_dashboard_head {
+  height: 50px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 17px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.menu_dashboard_body {
+  padding: 30px;
+  height: calc(100% - 50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+
+  /* background: rgba(0, 0, 0, 0.5); */
 }
 
 .dashboard_rigth {
@@ -34,6 +56,7 @@
   padding: 30px;
   z-index: 100;
   color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 .dashboard_nav {
@@ -44,6 +67,15 @@
   height: 50px;
   background: plum;
   z-index: 500;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 30px;
+}
+.dashboard_nav_user {
+  font-size: 15px;
+  position: relative;
 }
 .dashboard_nav_center {
   position: absolute;
@@ -61,7 +93,7 @@
   height: 70px;
   border-radius: 50%;
   color: #fff;
-  background: pink;
+  background: #ca6ecd;
   margin-top: -10px;
 }
 .week_list {
@@ -84,14 +116,14 @@
   position: absolute;
   top: 50px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: #e2e2e8;
   height: 1px;
 }
 .week_item .line {
   position: absolute;
   top: 50px;
   width: 1px;
-  background: rgba(0, 0, 0, 0.8);
+  background: #e2e2e8;
   height: calc(100% - 50px);
 }
 
@@ -214,4 +246,30 @@
   width: 450px;
   padding: 25px;
   background: #fff;
+}
+
+/* .lunes .day_body {
+  background: rgba(58, 89, 101, 0.2);
+}
+.martes .day_body {
+  background: rgba(46, 137, 166, 0.2);
+}
+.miercoles .day_body {
+  background: rgba(151, 201, 68, 0.2);
+}
+.jueves .day_body {
+  background: rgba(235, 212, 56, 0.2);
+}
+.viernes .day_body {
+  background: rgba(249, 156, 63, 0.2);
+}
+.sabado .day_body {
+  background: rgba(241, 91, 77, 0.2);
+}
+.domingo .day_body {
+  background: rgba(241, 112, 150, 0.2);
+} */
+
+.soft_grey .day_body {
+  background: #eaedff;
 }
