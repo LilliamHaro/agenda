@@ -180,9 +180,9 @@
 
 .day_body li {
   padding: 3px 8px 5px;
-  background: #717fb3;
+  background: #eaedff;
   border-radius: 4px;
-  color: #fff;
+  color: #717fb3;
   margin-bottom: 15px;
   position: relative;
   overflow: hidden;
@@ -257,7 +257,7 @@
 }
 
 .soft_grey .day_body {
-  background: #eaedff;
+  background: #eaedff42;
 }
 
 /* .lunes .day_body {

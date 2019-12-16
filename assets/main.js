@@ -87,22 +87,31 @@ $(document).ready(function () {
           });
 
         }
+        console.log('hdhdhhhhhhhhhhhhhhhhh')
+        $('.modal_add_task').addClass('opacity-0')
+        $('.modal_edit_task').addClass('opacity-0')
+        setTimeout(function () {
+          $('.modal_add_task').addClass('display-none')
+          $('.modal_edit_task').addClass('display-none')
+        }, 500)
+
       }
       showAllActualsTask()
 
-      database.ref('users/' + userId + '/_tasks').on("child_changed", function (snapshot) {
-        $('.day_body li').remove();
+      database.ref('users/' + userId + '/_tasks').on("child_added", function (snapshot) {
         showAllActualsTask()
       });
 
       database.ref('users/' + userId + '/_tasks').on("child_removed", function (snapshot) {
         $('.day_body li').remove();
         showAllActualsTask()
+
       });
 
       database.ref('users/' + userId + '/_tasks').on("child_changed", function (snapshot) {
         $('.day_body li').remove();
         showAllActualsTask()
+
       });
 
       // BORRAR TAREA 
