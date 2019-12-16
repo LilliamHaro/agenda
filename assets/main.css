@@ -250,6 +250,7 @@
   padding: 25px;
   background: #fff;
   border-radius: 5px;
+  position: relative;
 }
 
 .modal_add_task_box_title {
@@ -258,6 +259,18 @@
 
 .soft_grey .day_body {
   background: #eaedff42;
+}
+
+.cross_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d1d1d1;
 }
 
 /* .lunes .day_body {

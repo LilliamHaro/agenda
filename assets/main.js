@@ -10,7 +10,38 @@ $(document).ready(function () {
       let userId = user.uid
       var database = firebase.database();
 
-      // mostrar datos 
+      function closeModals() {
+        // vaciar valores 
+
+
+
+
+        $('.modal_add_task').addClass('opacity-0')
+        $('.modal_edit_task').addClass('opacity-0')
+        setTimeout(function () {
+          $('.modal_add_task').addClass('display-none')
+          $('.modal_edit_task').addClass('display-none')
+        }, 500)
+      }
+
+
+
+      $('#modal_add_task').click(function (e) {
+        //if clicked element is not your element and parents aren't your div
+        if (e.target.id != 'modal_add_task_box' && $(e.target).parents('#modal_add_task_box').length == 0 || e.target.id == 'add_task' || e.target.id == 'add_cross_close') {
+          closeModals();
+        }
+      });
+
+      $('#modal_edit_task').click(function (e) {
+        //if clicked element is not your element and parents aren't your div
+        if (e.target.id != 'modal_edit_task_box' && $(e.target).parents('#modal_edit_task_box').length == 0 || e.target.id == 'edit_task' || e.target.id == 'edit_cross_close') {
+          closeModals();
+        }
+      });
+
+
+      // MOSTRAR DATOS 
       database.ref('users/' + userId).on('value', function (datasnapshot) {
         let user_name = datasnapshot.child('username').val()
         let user_email = datasnapshot.child('email').val()
@@ -19,14 +50,13 @@ $(document).ready(function () {
 
       })
 
-
+      // AGREGAR TAREA 
       $('#open_add_task').on('click', function () {
         $('.modal_add_task').removeClass('display-none')
         setTimeout(function () {
           $('.modal_add_task').removeClass('opacity-0')
         }, 50)
       })
-
 
       $('#add_task').on('click', function () {
 
@@ -46,6 +76,7 @@ $(document).ready(function () {
         })
 
       })
+
 
       // MOSTRAR TAREAS
       function showAllActualsTask() {
@@ -67,13 +98,6 @@ $(document).ready(function () {
 
         }
 
-        $('.modal_add_task').addClass('opacity-0')
-        $('.modal_edit_task').addClass('opacity-0')
-        setTimeout(function () {
-          $('.modal_add_task').addClass('display-none')
-          $('.modal_edit_task').addClass('display-none')
-        }, 500)
-
       }
       showAllActualsTask()
 
@@ -90,8 +114,8 @@ $(document).ready(function () {
       database.ref('users/' + userId + '/_tasks').on("child_changed", function (snapshot) {
         $('.day_body li').remove();
         showAllActualsTask()
-
       });
+
 
       // BORRAR TAREA 
       $('.day_body').on('click', '.task .cross', function () {
@@ -108,7 +132,6 @@ $(document).ready(function () {
           }
         })
       })
-
 
       // EDITAR TAREA 
       $('.day_body').on('click', '.task .edit', function () {
@@ -136,8 +159,6 @@ $(document).ready(function () {
         }, 50)
 
       })
-
-
 
       $('#edit_task').on('click', function () {
 
@@ -201,9 +222,6 @@ $(document).ready(function () {
 
           }, 500)
         }
-
-
-
 
       })
 
