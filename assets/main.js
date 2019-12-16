@@ -20,24 +20,6 @@ $(document).ready(function () {
       })
 
 
-      // AGREGAR TAREA 
-      // $('.day_button button').on('click', function () {
-      //   let g = new Date()
-      //   let id = $(this).attr('id').replace('add_', '');
-      //   let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
-
-      //   database.ref('users/' + userId + '/_tasks/' + id + '').push().set({
-      //     content: "aaaaahhh grtgdkfjgkj dgkdkflgdf ldkfglkdfglkfg dkljgdlkgfdgk",
-      //     status: 'hacer',
-      //     num_order: 1,
-      //     tipo: 'siempre',
-      //     id: id_task,
-      //   })
-
-
-      // })
-
-
       $('#open_add_task').on('click', function () {
         $('.modal_add_task').removeClass('display-none')
         setTimeout(function () {
@@ -55,7 +37,6 @@ $(document).ready(function () {
         let g = new Date()
 
         let id_task = g.getFullYear() + '_' + (g.getMonth() + 1) + '_' + g.getDate() + '_' + g.getHours() + '_' + g.getMinutes() + '_' + g.getSeconds() + '_' + g.getMilliseconds()
-        console.log('xxxxxxxxxxxxxxxxxxxxxx', userId, day)
         database.ref('users/' + userId + '/_tasks/' + day + '').push().set({
           content: content,
           status: status,
@@ -67,8 +48,6 @@ $(document).ready(function () {
       })
 
       // MOSTRAR TAREAS
-
-
       function showAllActualsTask() {
         let array_days = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']
         for (var i = 0; i < array_days.length; i++) {
@@ -77,17 +56,17 @@ $(document).ready(function () {
           database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
             var taskDay_item = datasnapshot.val()
             let task_plantilla = '<li class="task " data-tipo="' + taskDay_item.tipo + '" data-status="' + taskDay_item.status + '" data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
-            console.log('plantilaaa', task_plantilla)
+
 
             if (!$('.day_body li[data-id="' + taskDay_item.id + '"]').length) {
               $('.' + array_days_item + ' .day_body').append(task_plantilla)
             } else {
-              console.log('wat', !$('.day_body li[data-id="' + taskDay_item.id + '"]').length)
+
             }
           });
 
         }
-        console.log('hdhdhhhhhhhhhhhhhhhhh')
+
         $('.modal_add_task').addClass('opacity-0')
         $('.modal_edit_task').addClass('opacity-0')
         setTimeout(function () {
@@ -156,8 +135,6 @@ $(document).ready(function () {
           $('.modal_edit_task').removeClass('opacity-0')
         }, 50)
 
-        // $(this).parent().find('.content').text('new content 222')
-
       })
 
 
@@ -180,7 +157,7 @@ $(document).ready(function () {
           database.ref('users/' + userId + '/_tasks/' + task_old_day).on('child_added', function (datasnapshot) {
             let task = datasnapshot.val()
             let task_key = datasnapshot.key
-            console.log('dentrooo', task_id, task.id)
+
 
             if (task.id == task_id) {
               database.ref('users/' + userId + '/_tasks/' + task_old_day + '/' + task_key).set({
@@ -200,7 +177,7 @@ $(document).ready(function () {
           database.ref('users/' + userId + '/_tasks/' + task_old_day).on('child_added', function (datasnapshot) {
             let task = datasnapshot.val()
             let task_key = datasnapshot.key
-            console.log('dentrooo', task_id, task.id)
+
 
             if (task.id == task_id) {
               database.ref('users/' + userId + '/_tasks/' + task_old_day + '/' + task_key).remove()
@@ -229,14 +206,6 @@ $(document).ready(function () {
 
 
       })
-
-
-
-
-
-
-
-
 
     } else {
       $('.init').show()
@@ -322,7 +291,7 @@ $(document).ready(function () {
         alert(errorMessage);
       }
     }).then(function (data) {
-      console.log('usuario loggeado', data.user.uid)
+      console.log('usuario logeado', data.user.uid)
     });
   }
 
@@ -359,11 +328,6 @@ $(document).ready(function () {
       console.log('saliste');
     });
   })
-
-
-
-
-
 
 
 })
