@@ -90,9 +90,26 @@
   align-items: center;
   padding: 0 30px;
 }
+
 .dashboard_nav_user {
   font-size: 15px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user_icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #717fb3;
+  display: inline-block;
+  margin-left: 10px;
+}
+.user_icon img {
+  width: 100%;
+  border-radius: 50%;
+  height: 100%;
 }
 .dashboard_nav_center {
   position: absolute;
