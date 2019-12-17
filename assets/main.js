@@ -86,7 +86,7 @@ $(document).ready(function () {
           let array_days_item = array_days[i]
           database.ref('users/' + userId + '/_tasks/' + array_days_item + '').on("child_added", function (datasnapshot) {
             var taskDay_item = datasnapshot.val()
-            let task_plantilla = '<li class="task " data-tipo="' + taskDay_item.tipo + '" data-status="' + taskDay_item.status + '" data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
+            let task_plantilla = '<li class="task ' + taskDay_item.tipo + '" data-tipo="' + taskDay_item.tipo + '" data-status="' + taskDay_item.status + '" data-day="' + array_days_item + '" data-id="' + taskDay_item.id + '"> <span class="content">' + taskDay_item.content + '</span> <span class="cross">X</span><span class="edit">Z</span></li>'
 
 
             if (!$('.day_body li[data-id="' + taskDay_item.id + '"]').length) {
@@ -151,6 +151,9 @@ $(document).ready(function () {
         $('.modal_edit_task #edit_task_tipo').val(task_tipo)
         $('.modal_edit_task #edit_task_status').val(task_status)
         $('.modal_edit_task #edit_task_content').val(task_content)
+
+
+        //  mostrar el valor asignado en los select falsos provenientes de los values originlaes  y actuales de los select 
 
 
 
@@ -360,4 +363,35 @@ $(document).ready(function () {
 // hay una opcion de copiar la tarjeta 
 // editar abre un minimodal  
 // agregar es un unico boton para todos 
+
+
+// select 
+
+
+$('.select_base').each(function () {
+  let template = $(this).attr('data-title')
+  let container = $(this).parent().find('.fake_select_head')
+  container.append(template)
+
+  $(this).find('option').each(function () {
+    let template = $('<div class="fake_option" data-value="' + $(this).val() + '"  >' + $(this).text() + '<div>')
+    let container = $(this).parent().parent().find('.fake_select_body')
+    container.append(template)
+  })
+})
+
+
+$('.fake_select_head').on('click', function () {
+  $(this).parent().find('.fake_select_body ').toggleClass('closed')
+})
+
+$('.fake_select_body .fake_option').on('click', function () {
+  let newText = $(this).text()
+  let newValue = $(this).attr('data-value')
+  $(this).parent().addClass('closed')
+  $(this).parent().parent().find('.fake_select_head').text(newText)
+  $(this).parent().parent().find('select').val(newValue)
+})
+
+
 

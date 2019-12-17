@@ -69,10 +69,6 @@
       <span id="user_name" class="dashboard_nav_user"></span>
     </div>
 
-
-
-
-
     <section class="week_list">
 
       <div class="week_item_title">
@@ -170,7 +166,6 @@
 
     <div class="dashboard_rigth">
 
-
     </div>
 
 
@@ -183,44 +178,65 @@
     <div id="modal_add_task_box" class="modal_add_task_box">
 
       <span id="add_cross_close" class="cross_box">X</span>
+
       <h2 class="modal_add_task_box_title">Add task</h2>
-      <div>
-        <select name="" id="new_task_day">
-          <option value="lunes">Lunes</option>
-          <option value="martes">Martes </option>
-          <option value="miercoles">Miercoles</option>
-          <option value="jueves">Jueves</option>
-          <option value="viernes">Viernes</option>
-          <option value="sabado">Sabado</option>
-          <option value="domingo">Domingo</option>
-        </select>
-      </div>
-      <div>
-        <select name="" id="new_task_tipo">
-          <option value="always">Siempre</option>
-          <option value="sometimes">A veces</option>
-        </select>
+
+      <div class="modal_options">
+        <div class="modal_options_item dia">
+          <select class="select_base" data-title="Día" name="" id="new_task_day">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes </option>
+            <option value="miercoles">Miercoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sabado</option>
+            <option value="domingo">Domingo</option>
+          </select>
+
+          <div class="fake_select_head">
+
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
+        <div class="modal_options_item tipo">
+          <select class="select_base" data-title="Tipo" name="" id="new_task_tipo">
+            <option value="joy">Joy</option>
+            <option value="learn">Learn</option>
+            <option value="idk">IDK</option>
+          </select>
+
+          <div class="fake_select_head">
+
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
+        <div class="modal_options_item status">
+          <select class="select_base" data-title="Status" name="" id="new_task_status">
+            <option value="to_do">To Do</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+          <div class="fake_select_head">
+
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
+
       </div>
 
-      <div>
-        <select name="" id="new_task_status">
-          <option value="to_do">To Do</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
-      </div>
-      <div>
+      <div class="modal_textarea">
         <textarea name="" id="new_task_content" cols="30" rows="10"> </textarea>
       </div>
 
-      <div>
+      <div class="modal_btnContainer">
         <button id="add_task">Add Task</button>
       </div>
-
-
-
-
-
 
     </div>
 
@@ -232,30 +248,51 @@
     <div id="modal_edit_task_box" class="modal_edit_task_box">
       <span id="edit_cross_close" class="cross_box">X</span>
       <h2>edit</h2>
-      <div>
-        <select name="" id="edit_task_day">
-          <option value="lunes">Lunes</option>
-          <option value="martes">Martes </option>
-          <option value="miercoles">Miercoles</option>
-          <option value="jueves">Jueves</option>
-          <option value="viernes">Viernes</option>
-          <option value="sabado">Sabado</option>
-          <option value="domingo">Domingo</option>
-        </select>
-      </div>
-      <div>
-        <select name="" id="edit_task_tipo">
-          <option value="always">Siempre</option>
-          <option value="sometimes">A veces</option>
-        </select>
-      </div>
+      <div class="modal_options">
+        <div class="modal_options_item dia">
+          <select class="select_base" data-title="Día" name="" id="edit_task_day">
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes </option>
+            <option value="miercoles">Miercoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sabado</option>
+            <option value="domingo">Domingo</option>
+          </select>
+          <div class="fake_select_head">
 
-      <div>
-        <select name="" id="edit_task_status">
-          <option value="to_do">To Do</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
+        <div class="modal_options_item tipo">
+          <select class="select_base" data-title="Tipo" name="" id="edit_task_tipo">
+            <option value="joy">Joy</option>
+            <option value="learn">Learn</option>
+            <option value="idk">IDK</option>
+          </select>
+          <div class="fake_select_head">
+
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
+
+        <div class="modal_options_item status">
+          <select class="select_base" data-title="Status" name="" id="edit_task_status">
+            <option value="to_do">To Do</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+          <div class="fake_select_head">
+
+          </div>
+          <div class="fake_select_body closed">
+
+          </div>
+        </div>
       </div>
       <div>
         <textarea name="" id="edit_task_content" cols="30" rows="10"> </textarea>
