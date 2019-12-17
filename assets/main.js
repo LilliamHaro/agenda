@@ -141,6 +141,11 @@ $(document).ready(function () {
         let task_status = $(this).parent().attr('data-status')
         let task_content = $(this).parent().find('.content').text();
 
+        let text_day = $('#edit_task_day option[value="' + task_day + '"]').text()
+        let text_tipo = $('#edit_task_tipo option[value="' + task_tipo + '"]').text()
+        let text_status = $('#edit_task_status option[value="' + task_status + '"]').text()
+
+
 
         $('.modal_edit_task').removeClass('display-none')
         $('.modal_edit_task_box').attr('data-id', task_id)
@@ -153,7 +158,10 @@ $(document).ready(function () {
         $('.modal_edit_task #edit_task_content').val(task_content)
 
 
-        //  mostrar el valor asignado en los select falsos provenientes de los values originlaes  y actuales de los select 
+        $('.modal_edit_task .dia .fake_select_head').text(text_day)
+        $('.modal_edit_task .tipo .fake_select_head').text(text_tipo)
+        $('.modal_edit_task .status .fake_select_head').text(text_status)
+
 
 
 
