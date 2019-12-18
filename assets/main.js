@@ -390,7 +390,136 @@ $('.fake_select_body .fake_option').on('click', function () {
 
 
 // mostar el dia actual en mobile 
-//  hacer movimiento con fhecha entre dias  
+
+let array_days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado']
+let g = new Date()
+
+let i_today = g.getDay()
+let i_yesterday = g.getDay() - 1 < 0 ? array_days.length : g.getDay() - 1
+let i_tomorrow = g.getDay() + 1 > array_days.length ? 0 : g.getDay() + 1
+
+let yesterday = array_days[i_yesterday]
+let today = array_days[i_today]
+let tomorrow = array_days[i_tomorrow]
+
+console.log('todayyyyy', yesterday, today, tomorrow)
+
+$('.day.' + today + '').addClass('actual')
+$('.day.' + yesterday + '').addClass('yesterday')
+$('.day.' + tomorrow + '').addClass('tomorrow')
+
+
+
+for (var i = 0; i < array_days.length; i++) {
+  if (i < i_today) {
+    $('.day.' + array_days[i] + '').addClass('before')
+    $('.day.' + array_days[i] + '').attr('data-position', [i])
+
+  } else if (i > i_today) {
+    $('.day.' + array_days[i] + '').addClass('after')
+    $('.day.' + array_days[i] + '').attr('data-position', [i])
+
+  } else {
+    $('.day.' + array_days[i] + '').attr('data-position', [i])
+  }
+
+}
+
+//  hacer movimiento con fhecha entre dias  mobile
+
+$('.week_item_back').on('click', function () {
+  let yesterday_position = parseInt($('.day.yesterday').attr('data-position'))
+  let tomorrow_position = parseInt($('.day.tomorrow').attr('data-position'))
+  let today_position = parseInt($('.day.actual').attr('data-position'))
+
+  let new_yesterday_position = yesterday_position - 1 < 0 ? array_days.length - 1 : yesterday_position - 1
+  let new_today_position = today_position - 1 < 0 ? array_days.length - 1 : today_position - 1
+  let new_tomorrow_position = tomorrow_position - 1
+
+
+  if (today_position == 0) {
+
+    $('.day').removeClass('before after yesterday tomorrow actual')
+    $('.day').addClass('before')
+    $('.day[data-position="5"]').addClass('yesterday')
+    $('.day[data-position="6"]').addClass('actual')
+    $('.day[data-position="0"]').addClass('tomorrow after')
+
+    $('.day[data-position="6"]').removeClass('before')
+    $('.day[data-position="0"]').removeClass('before')
+
+  } else {
+
+    if (today_position == 1) {
+      $('.day[data-position="6"]').addClass('yesterday')
+    }
+
+    if (today_position == 6) {
+      $('.day[data-position="6"]').removeClass('actual')
+      $('.day[data-position="6"]').addClass('tomorrow after')
+    }
+    $('.day[data-position="' + new_yesterday_position + '"]').removeClass('before after')
+    $('.day[data-position="' + new_yesterday_position + '"]').addClass('yesterday before')
+    $('.day[data-position="' + new_today_position + '"]').removeClass('yesterday before after')
+    $('.day[data-position="' + new_today_position + '"]').addClass('actual')
+    $('.day[data-position="' + new_tomorrow_position + '"]').removeClass('actual before after')
+    $('.day[data-position="' + new_tomorrow_position + '"]').addClass('tomorrow after')
+    $('.day[data-position="' + tomorrow_position + '"]').removeClass('tomorrow')
+
+    console.log('dddddpppppp', new_yesterday_position)
+  }
+
+})
+
+$('.week_item_next').on('click', function () {
+  let yesterday_position = parseInt($('.day.yesterday').attr('data-position'))
+  let tomorrow_position = parseInt($('.day.tomorrow').attr('data-position'))
+  let today_position = parseInt($('.day.actual').attr('data-position'))
+
+  let new_yesterday_position = yesterday_position + 1 > array_days.length - 1 ? 0 : yesterday_position + 1
+  let new_today_position = today_position + 1 > array_days.length - 1 ? 0 : today_position + 1
+  let new_tomorrow_position = tomorrow_position + 1
+
+
+  if (today_position == array_days.length) {
+    console.log('asdhsdhs', today_position)
+
+    $('.day').removeClass('before after actual tomorrow yesterday')
+    $('.day').addClass('after')
+
+  } else {
+
+    if (today_position == 5) {
+      $('.day[data-position="0"]').addClass('tomorrow after')
+      $('.day[data-position="0"]').removeClass('before')
+      console.log('jjhjjjj')
+    }
+
+    if (today_position == 1) {
+      $('.day[data-position="6"]').removeClass('tomorrow')
+      $('.day[data-position="6"]').addClass('after')
+      $('.day[data-position="0"]').removeClass('actual')
+      console.log('jjhjjjj')
+    }
+
+    $('.day[data-position="' + yesterday_position + '"]').removeClass('yesterday')
+    $('.day[data-position="' + new_yesterday_position + '"]').removeClass('actual')
+    $('.day[data-position="' + new_yesterday_position + '"]').addClass('yesterday before')
+    $('.day[data-position="' + new_today_position + '"]').removeClass('tomorrow before after')
+    $('.day[data-position="' + new_today_position + '"]').addClass('actual')
+    $('.day[data-position="' + new_tomorrow_position + '"]').removeClass('before')
+    $('.day[data-position="' + new_tomorrow_position + '"]').addClass('tomorrow after')
+
+    console.log('coparration', yesterday_position, new_yesterday_position, today_position)
+
+
+  }
+})
+
+
+
+
+
 
 
 
