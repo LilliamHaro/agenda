@@ -452,7 +452,7 @@
     display: none;
   }
   .btn_open_add_task {
-    position: absolute;
+    position: fixed;
     bottom: 65px;
     right: 15px;
     width: 60px;
