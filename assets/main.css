@@ -27,6 +27,14 @@
 .display-none {
   display: none !important;
 }
+
+.mobile {
+  display: none;
+}
+
+.desktop {
+  display: block;
+}
 .dashboard {
   display: flex;
   justify-content: space-between;
@@ -393,8 +401,6 @@
 
 @media (max-width: 1200px) {
   .menu_dashboard {
-    /* transform: translateX(-100%); */
-    /* margin-left: -100%; */
     width: 50px;
   }
   .dashboard_nav {
@@ -407,7 +413,8 @@
   .week_list {
     width: calc(100% - 50px);
   }
-  .menu_dashboard_head {
+  .menu_dashboard_head,
+  .menu_dashboard_body {
     padding: 10px;
   }
   .menu_dashboard_text {
@@ -425,6 +432,13 @@
 }
 
 @media (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
   .week_item .day {
     width: 100%;
     position: absolute;
@@ -436,5 +450,22 @@
 
   .week_item .line {
     display: none;
+  }
+  .btn_open_add_task {
+    position: absolute;
+    bottom: 65px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+  }
+  .dashboard_nav {
+    padding: 0 10px;
+  }
+
+  .day_head {
+    background: #ecefff;
+  }
+  .soft_grey .day_body {
+    background: #fff;
   }
 }

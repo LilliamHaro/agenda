@@ -51,7 +51,7 @@ $(document).ready(function () {
       })
 
       // AGREGAR TAREA 
-      $('#open_add_task').on('click', function () {
+      $('.btn_open_add_task').on('click', function () {
         $('.modal_add_task').removeClass('display-none')
         setTimeout(function () {
           $('.modal_add_task').removeClass('opacity-0')
