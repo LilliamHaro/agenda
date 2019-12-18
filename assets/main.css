@@ -453,7 +453,7 @@
   }
   .btn_open_add_task {
     position: fixed;
-    bottom: 65px;
+    bottom: 15px;
     right: 15px;
     width: 60px;
     height: 60px;
@@ -467,5 +467,8 @@
   }
   .soft_grey .day_body {
     background: #fff;
+  }
+  .dashboard_rigth {
+    display: none;
   }
 }
