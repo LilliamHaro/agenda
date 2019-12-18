@@ -389,4 +389,8 @@ $('.fake_select_body .fake_option').on('click', function () {
 })
 
 
+// mostar el dia actual en mobile 
+//  hacer movimiento con fhecha entre dias  
+
+
 

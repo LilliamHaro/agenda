@@ -387,7 +387,7 @@
 
 @media (max-width: 1500px) {
   .dashboard_rigth {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0px;
     width: calc(100% - 220px);
