@@ -219,7 +219,7 @@ $(document).ready(function () {
             }
 
           })
-          console.log('diaididiaa', task_day, userId)
+          // console.log('diaididiaa', task_day, userId)
 
 
           setTimeout(function () {
@@ -402,7 +402,7 @@ let yesterday = array_days[i_yesterday]
 let today = array_days[i_today]
 let tomorrow = array_days[i_tomorrow]
 
-console.log('todayyyyy', yesterday, today, tomorrow)
+// console.log('todayyyyy', yesterday, today, tomorrow)
 
 $('.day.' + today + '').addClass('actual')
 $('.day.' + yesterday + '').addClass('yesterday')
@@ -466,7 +466,7 @@ $('.week_item_back').on('click', function () {
     $('.day[data-position="' + new_tomorrow_position + '"]').addClass('tomorrow after')
     $('.day[data-position="' + tomorrow_position + '"]').removeClass('tomorrow')
 
-    console.log('dddddpppppp', new_yesterday_position)
+    // console.log('dddddpppppp', new_yesterday_position)
   }
 
 })
@@ -482,7 +482,7 @@ $('.week_item_next').on('click', function () {
 
 
   if (today_position == array_days.length) {
-    console.log('asdhsdhs', today_position)
+    // console.log('asdhsdhs', today_position)
 
     $('.day').removeClass('before after actual tomorrow yesterday')
     $('.day').addClass('after')
@@ -492,14 +492,14 @@ $('.week_item_next').on('click', function () {
     if (today_position == 5) {
       $('.day[data-position="0"]').addClass('tomorrow after')
       $('.day[data-position="0"]').removeClass('before')
-      console.log('jjhjjjj')
+      // console.log('jjhjjjj')
     }
 
     if (today_position == 1) {
       $('.day[data-position="6"]').removeClass('tomorrow')
       $('.day[data-position="6"]').addClass('after')
       $('.day[data-position="0"]').removeClass('actual')
-      console.log('jjhjjjj')
+      // console.log('jjhjjjj')
     }
 
     $('.day[data-position="' + yesterday_position + '"]').removeClass('yesterday')
@@ -510,7 +510,7 @@ $('.week_item_next').on('click', function () {
     $('.day[data-position="' + new_tomorrow_position + '"]').removeClass('before')
     $('.day[data-position="' + new_tomorrow_position + '"]').addClass('tomorrow after')
 
-    console.log('coparration', yesterday_position, new_yesterday_position, today_position)
+    // console.log('coparration', yesterday_position, new_yesterday_position, today_position)
 
 
   }
