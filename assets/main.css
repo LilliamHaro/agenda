@@ -498,6 +498,7 @@
 
   .day_head {
     background: #ecefff;
+    border-top: 1px solid #e2e2e8;
   }
   .soft_grey .day_body {
     background: #fff;
