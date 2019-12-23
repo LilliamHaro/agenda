@@ -15,23 +15,25 @@
 
 
   <section style="display: none" class="init">
+    <div class="init_nav">
+      <button class="show_login">LOG IN</button>
+      <button class="show_register display-none">REGISTER</button>
+    </div>
 
     <!-- registro -->
-    <form id="reg_form">
+    <form id="reg_form" class="form_init">
+      <div class="form_init_title">Register</div>
       <input id="reg_name" name="reg_name" type="text" placeholder="Name">
       <input id="reg_email" name="reg_email" type="email" placeholder="Email">
       <input id="reg_password" name="reg_password" type="password" placeholder="password">
       <button type="submit">Registrarse</button>
     </form>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
 
     <!-- Login -->
-    <form id="log_form">
+    <form id="log_form" class="form_init display-none">
+      <div class="form_init_title">Login</div>
       <input id="log_email" name="log_email" type="email" placeholder="Email">
       <input id="log_password" name="log_password" type="password" placeholder="password">
       <button type="submit">Entrar</button>
@@ -59,7 +61,7 @@
 
         </div>
 
-        <!-- <button type="button" id="logout">Salir</button> -->
+        <button type="button" id="logout">Salir</button>
       </div>
 
 

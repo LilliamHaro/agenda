@@ -511,6 +511,9 @@ $('.week_item_next').on('click', function () {
     $('.day[data-position="' + new_tomorrow_position + '"]').addClass('tomorrow after')
 
     // console.log('coparration', yesterday_position, new_yesterday_position, today_position)
+    console.log('')
+
+
 
 
   }
