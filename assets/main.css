@@ -91,6 +91,7 @@
   height: 50px;
   padding: 10px 20px;
   background: rgba(221, 160, 221, 0.2);
+  outline: none;
 }
 
 .form_init button {
@@ -100,6 +101,7 @@
   border: 2px solid rgba(0, 0, 0, 0.8);
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
+  outline: none;
 }
 .dashboard {
   display: flex;
@@ -584,5 +586,8 @@
   }
   .user_name_text {
     display: none;
+  }
+  .form_init {
+    width: calc(100% - 60px);
   }
 }

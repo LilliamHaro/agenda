@@ -520,6 +520,28 @@ $('.week_item_next').on('click', function () {
 })
 
 
+$('#show_login').on('click', function () {
+  $('#show_login').addClass('display-none')
+  $('#show_register').removeClass('display-none')
+
+  $('#log_form').removeClass('display-none')
+  $('#reg_form').addClass('display-none')
+
+
+})
+
+$('#show_register').on('click', function () {
+
+  $('#show_register').addClass('display-none')
+  $('#show_login').removeClass('display-none')
+
+  $('#reg_form').removeClass('display-none')
+  $('#log_form').addClass('display-none')
+
+
+
+})
+
 
 
 
